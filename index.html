@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refuge Club — A Private Estate in Saint-Émilion, Bordeaux</title>
+<meta name="description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening July 2026. Prospectus on request.">
+<meta property="og:title" content="Refuge Club — A Private Estate in Saint-Émilion, Bordeaux">
+<meta property="og:description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening July 2026. Prospectus on request.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://refuge.club/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  --paper: #F7F4EE;
+  --paper-deep: #EFEAE0;
+  --ink: #1C1A17;
+  --ink-soft: #5C564D;
+  --claret: #5E1A24;
+  --gold-line: #A98E5B;
+  --display: 'Libre Caslon Display', Georgia, 'Times New Roman', serif;
+  --body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-padding-top: 96px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.65;
+}
+
+::selection { background: var(--claret); color: var(--paper); }
+
+a { color: var(--claret); text-decoration: none; }
+p a, dd a, .footer a { border-bottom: 1px solid transparent; transition: border-color 200ms ease; }
+p a:hover, dd a:hover, .footer a:hover { border-bottom-color: var(--claret); }
+
+:focus-visible { outline: 1px solid var(--claret); outline-offset: 2px; }
+
+/* ——— Utility voice: letterspaced caps ——— */
+.caps {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ——— Appellation line ——— */
+.appellation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  color: var(--ink-soft);
+}
+.appellation::before,
+.appellation::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 1px;
+  background: var(--gold-line);
+  flex: none;
+}
+.appellation .caps { font-size: 12px; color: var(--ink-soft); }
+
+/* ——— Monogram ——— */
+.monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--claret);
+  border-radius: 50%;
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 1;
+  color: var(--claret);
+  user-select: none;
+}
+.monogram.gold { border-color: var(--gold-line); color: var(--gold-line); }
+
+/* ——— Navigation ——— */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 40px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 200ms ease, border-color 200ms ease;
+}
+.nav.scrolled {
+  background: var(--paper);
+  border-bottom-color: var(--gold-line);
+}
+.nav-wordmark {
+  font-family: var(--display);
+  font-size: 20px;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+.nav-links { display: flex; align-items: baseline; gap: 14px; }
+.nav-links a { color: var(--ink); transition: color 200ms ease; }
+.nav-links a:hover { color: var(--claret); }
+.nav-links .sep { color: var(--gold-line); }
+
+/* ——— Sections ——— */
+section { padding: 160px 24px; scroll-margin-top: 96px; }
+.inner { max-width: 1100px; margin: 0 auto; }
+.prose { max-width: 62ch; margin-left: auto; margin-right: auto; text-align: center; }
+.prose p + p { margin-top: 1.6em; }
+
+.section-head { margin-bottom: 72px; }
+
+.divider {
+  width: 64px;
+  height: 1px;
+  background: var(--gold-line);
+  margin: 88px auto 0;
+}
+
+/* ——— Hero ——— */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--paper-deep);
+  padding: 140px 24px 120px;
+}
+.hero .appellation { margin-top: 40px; }
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 1.1;
+  max-width: 17ch;
+  text-wrap: balance;
+  margin-top: 40px;
+}
+.hero .hero-line {
+  margin-top: 32px;
+  font-size: 20px;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+.hero .btn { margin-top: 56px; }
+
+/* ——— Buttons ——— */
+.btn {
+  display: inline-block;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--claret);
+  background: transparent;
+  border: 1px solid var(--claret);
+  border-radius: 2px;
+  padding: 18px 40px;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+.btn:hover { background: var(--claret); color: var(--paper); }
+
+/* ——— Headings ——— */
+h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+/* ——— The estate ——— */
+.estate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.estate-frame {
+  background: var(--paper-deep);
+  border: 1px solid var(--gold-line);
+  aspect-ratio: 4 / 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.facts dt { color: var(--ink-soft); }
+.facts dd { margin-top: 10px; }
+.facts dd + dt { margin-top: 44px; }
+
+/* ——— Membership ——— */
+.tiers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 920px;
+  margin: 72px auto 0;
+}
+.tier {
+  background: var(--paper-deep);
+  border: 1px solid var(--gold-line);
+  padding: 56px 48px;
+  text-align: center;
+}
+.tier.partner { border-color: var(--claret); }
+.tier .price {
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 1.1;
+  margin-top: 28px;
+}
+.tier .places { margin-top: 14px; color: var(--ink-soft); }
+.tier dl { margin-top: 40px; text-align: center; }
+.tier dt { color: var(--ink-soft); }
+.tier dd { margin-top: 8px; }
+.tier dd + dt { margin-top: 28px; }
+.tier .tier-note { margin-top: 40px; color: var(--ink-soft); }
+.tiers-after { margin-top: 64px; text-align: center; color: var(--ink-soft); }
+
+/* ——— Calendar ——— */
+.timeline {
+  display: flex;
+  justify-content: center;
+  max-width: 860px;
+  margin: 0 auto;
+}
+.timeline .moment {
+  flex: 1;
+  text-align: center;
+  padding: 8px 40px;
+}
+.timeline .moment + .moment { border-left: 1px solid var(--gold-line); }
+.timeline .moment p { margin-top: 16px; }
+.timeline .caps { color: var(--ink-soft); }
+
+/* ——— Request ——— */
+.request h2 { text-align: center; }
+.request .request-line { margin-top: 24px; text-align: center; color: var(--ink-soft); }
+.form-wrap { max-width: 480px; margin: 64px auto 0; }
+.field { margin-bottom: 40px; }
+.field label { display: block; color: var(--ink-soft); margin-bottom: 12px; }
+.field input,
+.field textarea {
+  width: 100%;
+  background: var(--paper-deep);
+  border: none;
+  border-bottom: 1px solid var(--ink-soft);
+  border-radius: 2px 2px 0 0;
+  font-family: var(--body);
+  font-size: 17px;
+  color: var(--ink);
+  padding: 14px 16px;
+  transition: border-color 200ms ease;
+  resize: vertical;
+}
+.field input:focus,
+.field textarea:focus { outline: none; border-bottom-color: var(--claret); }
+.field.invalid input,
+.field.invalid textarea { border-bottom-color: var(--claret); }
+.field .error {
+  display: none;
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--claret);
+}
+.field.invalid .error { display: block; }
+.form-actions { text-align: center; margin-top: 56px; }
+.confirmation { text-align: center; padding: 48px 0; }
+.confirmation p { margin-top: 32px; }
+
+/* ——— Footer ——— */
+.footer {
+  background: var(--paper-deep);
+  text-align: center;
+  padding: 120px 24px 96px;
+}
+.footer .caps { display: block; }
+.footer .f-name { margin-top: 32px; color: var(--ink); }
+.footer .f-place { margin-top: 16px; color: var(--ink-soft); }
+.footer .f-mail { display: inline-block; margin-top: 32px; }
+.footer .f-copy { margin-top: 64px; color: var(--ink-soft); }
+
+/* ——— Tonal movements ——— */
+.stewardship { background: var(--paper-deep); }
+
+/* ——— Motion ——— */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .hero-seq { animation: rise 600ms ease-out both; }
+  .hero-seq:nth-child(1) { animation-delay: 100ms; }
+  .hero-seq:nth-child(2) { animation-delay: 250ms; }
+  .hero-seq:nth-child(3) { animation-delay: 400ms; }
+  .hero-seq:nth-child(4) { animation-delay: 550ms; }
+  .hero-seq:nth-child(5) { animation-delay: 700ms; }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+html.motion .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+}
+html.motion .reveal.revealed { opacity: 1; transform: none; }
+
+/* ——— Responsive ——— */
+@media (max-width: 900px) {
+  .estate-grid { grid-template-columns: 1fr; gap: 56px; max-width: 560px; }
+  .tiers { grid-template-columns: 1fr; max-width: 520px; }
+}
+@media (max-width: 760px) {
+  body { font-size: 18px; }
+  section { padding: 96px 20px; }
+  .hero { padding: 120px 20px 96px; }
+  .hero h1 { font-size: 40px; }
+  .section-head { margin-bottom: 56px; }
+  .timeline { flex-direction: column; max-width: 480px; }
+  .timeline .moment { padding: 40px 8px; }
+  .timeline .moment + .moment { border-left: none; border-top: 1px solid var(--gold-line); }
+  .nav { padding: 18px 20px; }
+  .appellation::before, .appellation::after { width: 40px; }
+  .divider { margin-top: 64px; }
+}
+@media (max-width: 600px) {
+  .nav-links .mid { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav" aria-label="Main">
+  <a class="nav-wordmark" href="#top">REFUGE</a>
+  <div class="nav-links caps">
+    <a class="mid" href="#estate">The estate</a><span class="sep mid" aria-hidden="true">·</span><a class="mid" href="#membership">Membership</a><span class="sep mid" aria-hidden="true">·</span><a href="#request">Request</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <span class="monogram hero-seq" aria-hidden="true">R</span>
+  <div class="appellation hero-seq"><span class="caps">Saint-Émilion · Bordeaux · MMXXVI</span></div>
+  <h1 class="hero-seq">The next 20 years don&rsquo;t have to look like the last&nbsp;10.</h1>
+  <p class="hero-line hero-seq">Refuge is a private estate in Saint-Émilion, shared by a small number of founding families.</p>
+  <a class="btn hero-seq" href="#request">Request the prospectus</a>
+</header>
+
+<section id="idea">
+  <div class="inner reveal">
+    <div class="appellation section-head"><span class="caps">The idea</span></div>
+    <div class="prose">
+      <p>You built the company. You raised the round, ran the team, made the flight. The last ten years were spent at full speed, and the calendar shows it.</p>
+      <p>Refuge is the counterweight. A working estate in Saint-Émilion where a small group of families keep a permanent foothold — a place that is already yours when you arrive, where the days are long, the phones are quiet, and the people around the table chose the same thing you did.</p>
+      <p>Not a hotel. Not a resort. An estate, held in common by people who decided the next twenty years should look different.</p>
+    </div>
+    <div class="divider" role="presentation"></div>
+  </div>
+</section>
+
+<section id="estate">
+  <div class="inner reveal">
+    <div class="appellation section-head"><span class="caps">The estate</span></div>
+    <div class="estate-grid">
+      <div class="estate-frame"><span class="monogram gold" aria-hidden="true">R</span></div>
+      <dl class="facts">
+        <dt class="caps">Setting</dt>
+        <dd>Among the vineyards of Saint-Émilion and Pomerol, on Bordeaux&rsquo;s Right Bank.</dd>
+        <dt class="caps">Form</dt>
+        <dd>A private estate held for the use of its members and their families.</dd>
+        <dt class="caps">Rhythm</dt>
+        <dd>Open year-round. The estate runs to the seasons of the region.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section id="membership">
+  <div class="inner reveal">
+    <div class="appellation section-head"><span class="caps">Founding memberships · 2026</span></div>
+    <p class="prose">Refuge opens in July 2026 with a founding group, structured in two forms.</p>
+    <div class="tiers">
+      <article class="tier partner">
+        <h3 class="caps">Estate Partner</h3>
+        <p class="price">€150,000</p>
+        <p class="places">Six partnerships.</p>
+        <dl>
+          <dt class="caps">Retainer</dt>
+          <dd>An annual retainer applies.</dd>
+        </dl>
+      </article>
+      <article class="tier">
+        <h3 class="caps">Founding Member</h3>
+        <p class="tier-note">A founding fee and annual retainer apply. Places and terms are set out in the prospectus.</p>
+      </article>
+    </div>
+    <p class="tiers-after">Full terms, fees, and the founding agreement are set out in the prospectus, available on request.</p>
+  </div>
+</section>
+
+<section class="stewardship" id="stewardship">
+  <div class="inner reveal">
+    <div class="appellation section-head"><span class="caps">Stewardship</span></div>
+    <div class="prose">
+      <p>Refuge is founded by Dan Barnes, former Chief Operating Officer of N3TWORK and co-founder of RIFT. The estate is held and operated under a structure built for one purpose: that it works as well in year twenty as in year one.</p>
+    </div>
+  </div>
+</section>
+
+<section id="calendar">
+  <div class="inner reveal">
+    <div class="appellation section-head"><span class="caps">2026</span></div>
+    <div class="timeline">
+      <div class="moment">
+        <span class="caps">Now</span>
+        <p>Founding conversations underway. Prospectus available on request.</p>
+      </div>
+      <div class="moment">
+        <span class="caps">July 2026</span>
+        <p>The estate opens to members.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="request" id="request">
+  <div class="inner reveal">
+    <div class="appellation section-head"><span class="caps">By invitation</span></div>
+    <h2>Request the prospectus.</h2>
+    <p class="request-line">Tell us briefly who you are. We reply personally.</p>
+    <div class="form-wrap">
+      <form id="request-form" novalidate>
+        <div class="field" id="field-name-wrap">
+          <label class="caps" for="field-name">Name</label>
+          <input type="text" id="field-name" name="name" autocomplete="name">
+          <p class="error">Your name is needed.</p>
+        </div>
+        <div class="field" id="field-email-wrap">
+          <label class="caps" for="field-email">Email</label>
+          <input type="email" id="field-email" name="email" autocomplete="email">
+          <p class="error">A valid email address is needed.</p>
+        </div>
+        <div class="field">
+          <label class="caps" for="field-about">A line or two about you and your family</label>
+          <textarea id="field-about" name="about" rows="3"></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn" type="submit">Request the prospectus</button>
+        </div>
+      </form>
+      <div class="confirmation" id="confirmation" role="status" hidden>
+        <span class="monogram" aria-hidden="true">R</span>
+        <p>Thank you. We&rsquo;ll be in touch personally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span class="monogram" aria-hidden="true">R</span>
+  <span class="caps f-name">Refuge</span>
+  <span class="caps f-place">Saint-Émilion · Bordeaux</span>
+  <a class="f-mail" href="mailto:hello@refuge.club">hello@refuge.club</a>
+  <span class="caps f-copy">© Refuge Club MMXXVI</span>
+</footer>
+
+<script>
+(function () {
+  var nav = document.getElementById('nav');
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (motionOK && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('motion');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  }
+
+  var form = document.getElementById('request-form');
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var name = document.getElementById('field-name');
+    var email = document.getElementById('field-email');
+    var about = document.getElementById('field-about');
+
+    var nameOK = name.value.trim() !== '';
+    var emailOK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    document.getElementById('field-name-wrap').classList.toggle('invalid', !nameOK);
+    document.getElementById('field-email-wrap').classList.toggle('invalid', !emailOK);
+    if (!nameOK || !emailOK) return;
+
+    var subject = 'Prospectus request — ' + name.value.trim();
+    var body = 'Name: ' + name.value.trim() +
+      '\nEmail: ' + email.value.trim() +
+      (about.value.trim() ? '\n\n' + about.value.trim() : '');
+    window.location.href = 'mailto:hello@refuge.club?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+
+    form.hidden = true;
+    document.getElementById('confirmation').hidden = false;
+  });
+})();
+</script>
+
+</body>
+</html>
