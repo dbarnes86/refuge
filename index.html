@@ -9,6 +9,7 @@
 <meta property="og:description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening late 2026. Prospectus on request.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://refuge.club/">
+<meta property="og:image" content="https://refuge.club/assets/estate-aerial.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
@@ -118,6 +119,9 @@ p a:hover, dd a:hover, .footer a:hover { border-bottom-color: var(--claret); }
 .nav-links a { color: var(--ink); transition: color 200ms ease; }
 .nav-links a:hover { color: var(--claret); }
 .nav-links .sep { color: var(--gold-line); }
+body.media-hero .nav:not(.scrolled) .nav-wordmark,
+body.media-hero .nav:not(.scrolled) .nav-links a { color: var(--paper); }
+body.media-hero .nav:not(.scrolled) .nav-links a:hover { color: var(--paper-deep); }
 
 /* ——— Sections ——— */
 section { padding: 160px 24px; scroll-margin-top: 96px; }
@@ -136,6 +140,8 @@ section { padding: 160px 24px; scroll-margin-top: 96px; }
 
 /* ——— Hero ——— */
 .hero {
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -145,6 +151,32 @@ section { padding: 160px 24px; scroll-margin-top: 96px; }
   text-align: center;
   background: var(--paper-deep);
   padding: 140px 24px 120px;
+}
+.hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  opacity: 0.12;
+  z-index: 1;
+}
+.hero-seq { position: relative; z-index: 2; }
+.hero.has-media h1 { color: var(--paper); }
+.hero.has-media .hero-line { color: var(--paper-deep); }
+.hero.has-media .appellation .caps { color: var(--paper-deep); }
+.hero.has-media .monogram { border-color: var(--paper); color: var(--paper); }
+.hero.has-media .btn { border-color: var(--paper); color: var(--paper); }
+.hero.has-media .btn:hover { background: var(--paper); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  .hero-media { display: none; }
+  .hero.has-media { background: var(--paper-deep) url('assets/estate-aerial.jpg') center / cover no-repeat; }
 }
 .hero .appellation { margin-top: 40px; }
 .hero h1 {
@@ -360,7 +392,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 }
 </style>
 </head>
-<body>
+<body class="media-hero">
 
 <nav class="nav" id="nav" aria-label="Main">
   <a class="nav-wordmark" href="#top">REFUGE</a>
@@ -369,7 +401,11 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   </div>
 </nav>
 
-<header class="hero" id="top">
+<header class="hero has-media" id="top">
+  <video class="hero-media" autoplay muted loop playsinline preload="auto" poster="assets/estate-aerial.jpg" aria-hidden="true" tabindex="-1">
+    <source src="assets/estate-aerial.mp4" type="video/mp4">
+  </video>
+  <div class="hero-scrim" aria-hidden="true"></div>
   <span class="monogram hero-seq" aria-hidden="true">R</span>
   <div class="appellation hero-seq"><span class="caps">Saint-Émilion · Bordeaux · MMXXVI</span></div>
   <h1 class="hero-seq">The next 20 years don&rsquo;t have to look like the last&nbsp;10.</h1>
@@ -506,6 +542,10 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   onScroll();
 
   var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!motionOK) {
+    var heroMedia = document.querySelector('.hero-media');
+    if (heroMedia) heroMedia.remove();
+  }
   if (motionOK && 'IntersectionObserver' in window) {
     document.documentElement.classList.add('motion');
     var io = new IntersectionObserver(function (entries) {
