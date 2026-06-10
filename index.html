@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Refuge Club — A Private Estate in Saint-Émilion, Bordeaux</title>
-<meta name="description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening July 2026. Prospectus on request.">
+<meta name="description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening late 2026. Prospectus on request.">
 <meta property="og:title" content="Refuge Club — A Private Estate in Saint-Émilion, Bordeaux">
-<meta property="og:description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening July 2026. Prospectus on request.">
+<meta property="og:description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening late 2026. Prospectus on request.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://refuge.club/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -214,32 +214,35 @@ h2 {
 /* ——— Membership ——— */
 .tiers {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  max-width: 920px;
+  max-width: 1060px;
   margin: 72px auto 0;
 }
 .tier {
   background: var(--paper-deep);
   border: 1px solid var(--gold-line);
-  padding: 56px 48px;
+  padding: 64px 40px;
   text-align: center;
 }
 .tier.partner { border-color: var(--claret); }
+.tier h3::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--gold-line);
+  margin: 22px auto 0;
+}
 .tier .price {
   font-family: var(--body);
   font-weight: 500;
-  font-size: 44px;
+  font-size: 42px;
   line-height: 1.1;
-  margin-top: 28px;
+  margin-top: 30px;
 }
 .tier .places { margin-top: 14px; color: var(--ink-soft); }
-.tier dl { margin-top: 40px; text-align: center; }
-.tier dt { color: var(--ink-soft); }
-.tier dd { margin-top: 8px; }
-.tier dd + dt { margin-top: 28px; }
-.tier .tier-note { margin-top: 40px; color: var(--ink-soft); }
-.tiers-after { margin-top: 64px; text-align: center; color: var(--ink-soft); }
+.tiers-after { margin-top: 64px; text-align: center; color: var(--ink-soft); max-width: 62ch; margin-left: auto; margin-right: auto; }
 
 /* ——— Calendar ——— */
 .timeline {
@@ -288,6 +291,12 @@ h2 {
   color: var(--claret);
 }
 .field.invalid .error { display: block; }
+.form-error {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 17px;
+  color: var(--claret);
+}
 .form-actions { text-align: center; margin-top: 56px; }
 .confirmation { text-align: center; padding: 48px 0; }
 .confirmation p { margin-top: 32px; }
@@ -331,7 +340,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 /* ——— Responsive ——— */
 @media (max-width: 900px) {
   .estate-grid { grid-template-columns: 1fr; gap: 56px; max-width: 560px; }
-  .tiers { grid-template-columns: 1fr; max-width: 520px; }
+  .tiers { grid-template-columns: 1fr; max-width: 480px; }
 }
 @media (max-width: 760px) {
   body { font-size: 18px; }
@@ -400,23 +409,23 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 <section id="membership">
   <div class="inner reveal">
     <div class="appellation section-head"><span class="caps">Founding memberships · 2026</span></div>
-    <p class="prose">Refuge opens in July 2026 with a founding group, structured in two forms.</p>
+    <p class="prose">Refuge opens in late 2026 with a founding group, structured in three forms.</p>
     <div class="tiers">
       <article class="tier partner">
         <h3 class="caps">Estate Partner</h3>
         <p class="price">€150,000</p>
         <p class="places">Six partnerships.</p>
-        <dl>
-          <dt class="caps">Retainer</dt>
-          <dd>An annual retainer applies.</dd>
-        </dl>
       </article>
       <article class="tier">
-        <h3 class="caps">Founding Member</h3>
-        <p class="tier-note">A founding fee and annual retainer apply. Places and terms are set out in the prospectus.</p>
+        <h3 class="caps">Founding Partner</h3>
+        <p class="price">€75,000</p>
+      </article>
+      <article class="tier">
+        <h3 class="caps">Member</h3>
+        <p class="price">€25,000</p>
       </article>
     </div>
-    <p class="tiers-after">Full terms, fees, and the founding agreement are set out in the prospectus, available on request.</p>
+    <p class="tiers-after">Each form carries a founding fee and an annual retainer. Full terms, fees, and the founding agreement are set out in the prospectus, available on request.</p>
   </div>
 </section>
 
@@ -424,7 +433,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   <div class="inner reveal">
     <div class="appellation section-head"><span class="caps">Stewardship</span></div>
     <div class="prose">
-      <p>Refuge is founded by Dan Barnes, former Chief Operating Officer of N3TWORK and co-founder of RIFT. The estate is held and operated under a structure built for one purpose: that it works as well in year twenty as in year one.</p>
+      <p>Refuge is founded by Dan Barnes. The estate is held and operated under a structure built for one purpose: that it works as well in year twenty as in year one.</p>
     </div>
   </div>
 </section>
@@ -438,7 +447,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
         <p>Founding conversations underway. Prospectus available on request.</p>
       </div>
       <div class="moment">
-        <span class="caps">July 2026</span>
+        <span class="caps">Late 2026</span>
         <p>The estate opens to members.</p>
       </div>
     </div>
@@ -467,8 +476,9 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
           <textarea id="field-about" name="about" rows="3"></textarea>
         </div>
         <div class="form-actions">
-          <button class="btn" type="submit">Request the prospectus</button>
+          <button class="btn" type="submit" id="submit-btn">Request the prospectus</button>
         </div>
+        <p class="form-error" id="form-error" hidden>This didn&rsquo;t send. Write to us directly at <a href="mailto:hello@refuge.club">hello@refuge.club</a>.</p>
       </form>
       <div class="confirmation" id="confirmation" role="status" hidden>
         <span class="monogram" aria-hidden="true">R</span>
@@ -522,15 +532,29 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     document.getElementById('field-email-wrap').classList.toggle('invalid', !emailOK);
     if (!nameOK || !emailOK) return;
 
-    var subject = 'Prospectus request — ' + name.value.trim();
-    var body = 'Name: ' + name.value.trim() +
-      '\nEmail: ' + email.value.trim() +
-      (about.value.trim() ? '\n\n' + about.value.trim() : '');
-    window.location.href = 'mailto:hello@refuge.club?subject=' +
-      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    var button = document.getElementById('submit-btn');
+    var formError = document.getElementById('form-error');
+    button.disabled = true;
+    formError.hidden = true;
 
-    form.hidden = true;
-    document.getElementById('confirmation').hidden = false;
+    fetch('https://formsubmit.co/ajax/hello@refuge.club', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name: name.value.trim(),
+        email: email.value.trim(),
+        message: about.value.trim(),
+        _subject: 'Prospectus request — ' + name.value.trim(),
+        _template: 'table'
+      })
+    }).then(function (response) {
+      if (!response.ok) throw new Error('send failed');
+      form.hidden = true;
+      document.getElementById('confirmation').hidden = false;
+    }).catch(function () {
+      button.disabled = false;
+      formError.hidden = false;
+    });
   });
 })();
 </script>
