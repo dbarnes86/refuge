@@ -549,6 +549,9 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
       })
     }).then(function (response) {
       if (!response.ok) throw new Error('send failed');
+      return response.json();
+    }).then(function (result) {
+      if (String(result.success) !== 'true') throw new Error('send failed');
       form.hidden = true;
       document.getElementById('confirmation').hidden = false;
     }).catch(function () {
