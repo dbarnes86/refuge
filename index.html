@@ -17,42 +17,51 @@
 <meta name="theme-color" content="#F7F4EE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
 :root {
   --paper: #F7F4EE;
   --paper-deep: #EFEAE0;
   --ink: #1C1A17;
   --ink-soft: #5C564D;
   --claret: #5E1A24;
-  --gold-line: #A98E5B;
+  --gold: #A98E5B;
+  --gold-soft: rgba(169, 142, 91, 0.45);
+  --night: #15130F;
   --display: 'Libre Caslon Display', Georgia, 'Times New Roman', serif;
   --body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --gutter: clamp(20px, 5vw, 72px);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-padding-top: 96px; }
-
+html { scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
 body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--body);
-  font-weight: 400;
   font-size: 19px;
   line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img, video { display: block; max-width: 100%; }
+::selection { background: var(--claret); color: var(--paper); }
+a { color: var(--claret); text-decoration: none; }
+:focus-visible { outline: 1px solid var(--claret); outline-offset: 3px; }
+
+/* Paper grain over everything */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.1 0 0 0 0 0.09 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-::selection { background: var(--claret); color: var(--paper); }
-
-a { color: var(--claret); text-decoration: none; }
-p a, dd a, .footer a { border-bottom: 1px solid transparent; transition: border-color 200ms ease; }
-p a:hover, dd a:hover, .footer a:hover { border-bottom-color: var(--claret); }
-
-:focus-visible { outline: 1px solid var(--claret); outline-offset: 2px; }
-
-/* ——— Utility voice: letterspaced caps ——— */
 .caps {
   font-family: var(--body);
   font-weight: 500;
@@ -60,150 +69,40 @@ p a:hover, dd a:hover, .footer a:hover { border-bottom-color: var(--claret); }
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
-
-/* ——— Appellation line ——— */
-.appellation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  color: var(--ink-soft);
-}
-.appellation::before,
-.appellation::after {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 1px;
-  background: var(--gold-line);
-  flex: none;
-}
-.appellation .caps { font-size: 12px; color: var(--ink-soft); }
-
-/* ——— Monogram ——— */
-.monogram {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--claret);
-  border-radius: 50%;
-  font-family: var(--display);
-  font-size: 24px;
-  line-height: 1;
-  color: var(--claret);
-  user-select: none;
-}
-.monogram.gold { border-color: var(--gold-line); color: var(--gold-line); }
-
-/* ——— Navigation ——— */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 22px 40px;
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background 200ms ease, border-color 200ms ease;
-}
-.nav.scrolled {
-  background: var(--paper);
-  border-bottom-color: var(--gold-line);
-}
-.nav-wordmark {
-  font-family: var(--display);
-  font-size: 20px;
-  color: var(--ink);
-  letter-spacing: 0.04em;
-}
-.nav-links { display: flex; align-items: baseline; gap: 14px; }
-.nav-links a { color: var(--ink); transition: color 200ms ease; }
-.nav-links a:hover { color: var(--claret); }
-.nav-links .sep { color: var(--gold-line); }
-body.media-hero .nav:not(.scrolled) .nav-wordmark,
-body.media-hero .nav:not(.scrolled) .nav-links a { color: var(--paper); }
-body.media-hero .nav:not(.scrolled) .nav-links a:hover { color: var(--paper-deep); }
-
-/* ——— Sections ——— */
-section { padding: 160px 24px; scroll-margin-top: 96px; }
-.inner { max-width: 1100px; margin: 0 auto; }
-.prose { max-width: 62ch; margin-left: auto; margin-right: auto; text-align: center; }
-.prose p + p { margin-top: 1.6em; }
-
-.section-head { margin-bottom: 72px; }
-
-.divider {
-  width: 64px;
-  height: 1px;
-  background: var(--gold-line);
-  margin: 88px auto 0;
-}
-
-/* ——— Hero ——— */
-.hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: var(--paper-deep);
-  padding: 140px 24px 120px;
-}
-.hero-media {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-.hero-scrim {
-  position: absolute;
-  inset: 0;
-  background: var(--ink);
-  opacity: 0.12;
-  z-index: 1;
-}
-.hero-seq { position: relative; z-index: 2; }
-.hero.has-media h1 { color: var(--paper); }
-.hero.has-media .hero-line { color: var(--paper-deep); }
-.hero.has-media .appellation .caps { color: var(--paper-deep); }
-.hero.has-media .monogram { border-color: var(--paper); color: var(--paper); }
-.hero.has-media .btn { border-color: var(--paper); color: var(--paper); }
-.hero.has-media .btn:hover { background: var(--paper); color: var(--ink); }
-@media (prefers-reduced-motion: reduce) {
-  .hero-media { display: none; }
-  .hero.has-media { background: var(--paper-deep) url('assets/estate-aerial.jpg') center / cover no-repeat; }
-}
-.hero .appellation { margin-top: 40px; }
-.hero h1 {
+.display { font-family: var(--display); font-weight: 400; }
+h2 {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 64px;
-  line-height: 1.1;
-  max-width: 17ch;
+  font-size: clamp(40px, 5.6vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
   text-wrap: balance;
-  margin-top: 40px;
 }
-.hero .hero-line {
-  margin-top: 32px;
-  font-size: 20px;
+h2 em, .statement em { font-family: var(--body); font-style: italic; font-weight: 400; letter-spacing: -0.02em; }
+
+/* Section label: numeral, hairline, caps */
+.label {
+  display: flex;
+  align-items: center;
+  gap: 18px;
   color: var(--ink-soft);
-  max-width: 46ch;
+  margin-bottom: 40px;
 }
-.hero .btn { margin-top: 56px; }
+.label .n { font-family: var(--display); font-size: 18px; color: var(--claret); letter-spacing: 0; }
+.label::after { content: ""; flex: 0 0 56px; height: 1px; background: var(--gold); order: 1; }
+.label .t { order: 2; }
+.label.center { justify-content: center; }
+.on-dark .label { color: rgba(247, 244, 238, 0.7); }
+.on-dark .label .n { color: var(--gold); }
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 0 var(--gutter); }
 
 /* ——— Buttons ——— */
 .btn {
-  display: inline-block;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
   font-family: var(--body);
   font-weight: 500;
   font-size: 13px;
@@ -211,395 +110,845 @@ section { padding: 160px 24px; scroll-margin-top: 96px; }
   text-transform: uppercase;
   color: var(--claret);
   background: transparent;
-  border: 1px solid var(--claret);
-  border-radius: 2px;
-  padding: 18px 40px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 18px 32px;
   cursor: pointer;
-  transition: background 200ms ease, color 200ms ease;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 450ms var(--ease), border-color 450ms var(--ease);
 }
-.btn:hover { background: var(--claret); color: var(--paper); }
-
-.btn-solid { background: var(--claret); color: var(--paper); }
-.btn-solid:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-.hero.has-media .btn-solid { background: var(--paper); border-color: var(--paper); color: var(--ink); }
-.hero.has-media .btn-solid:hover { background: var(--claret); border-color: var(--claret); color: var(--paper); }
-.hero-cta { margin-top: 56px; }
-.hero-credit {
+.btn::before {
+  content: "";
   position: absolute;
-  right: 20px;
-  bottom: 16px;
-  z-index: 2;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--paper-deep);
-  opacity: 0.8;
+  inset: 0;
+  z-index: -1;
+  background: var(--claret);
+  transform: translateY(101%);
+  transition: transform 450ms var(--ease);
 }
-.hero .hero-cta .btn { margin-top: 0; }
-.hero-note { margin-top: 18px; font-size: 16px; font-style: italic; color: var(--ink-soft); }
-.hero.has-media .hero-note { color: var(--paper-deep); }
-.section-cta { text-align: center; margin-top: 56px; }
-.nav-cta {
-  margin-left: 18px;
-  padding: 9px 18px;
-  border: 1px solid var(--claret);
-  border-radius: 2px;
-  color: var(--claret);
-}
-.nav-links a.nav-cta:hover { background: var(--claret); color: var(--paper); }
-body.media-hero .nav:not(.scrolled) .nav-links a.nav-cta { border-color: var(--paper); }
+.btn:hover::before { transform: none; }
+.btn:hover { color: var(--paper); border-color: var(--claret); }
+.btn .arrow { display: inline-block; transition: transform 450ms var(--ease); }
+.btn:hover .arrow { transform: translateX(5px); }
+.btn-solid { background: var(--claret); color: var(--paper); border-color: var(--claret); }
+.btn-solid::before { background: var(--ink); }
+.btn-solid:hover { border-color: var(--ink); }
+.btn-light { color: var(--paper); }
+.btn-light::before { background: var(--paper); }
+.btn-light:hover { color: var(--ink); border-color: var(--paper); }
+.btn:disabled { opacity: 0.6; cursor: default; }
 
-/* ——— A day ——— */
-.day { background: var(--paper-deep); }
-.moments {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 1060px;
-  margin: 0 auto;
+/* ——— Navigation ——— */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px var(--gutter);
+  transition: background 400ms ease, padding 400ms var(--ease), transform 500ms var(--ease);
 }
-.moments li { padding: 8px 32px; text-align: center; }
-.moments li + li { border-left: 1px solid var(--gold-line); }
-.moments .caps { color: var(--claret); }
-.moments p { margin-top: 16px; }
+.nav.scrolled {
+  background: rgba(247, 244, 238, 0.86);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.nav.tucked { transform: translateY(-100%); }
+.nav-wordmark { font-family: var(--display); font-size: 21px; letter-spacing: 0.14em; color: var(--ink); }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { color: var(--ink); position: relative; }
+.nav-links a.mid::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 400ms var(--ease);
+}
+.nav-links a.mid:hover::after { transform: scaleX(1); transform-origin: left; }
+.nav-cta { border: 1px solid currentColor; border-radius: 999px; padding: 9px 18px; transition: background 300ms ease, color 300ms ease; }
+.nav-links a.nav-cta:hover { background: var(--claret); border-color: var(--claret); color: var(--paper); }
+.nav:not(.scrolled) .nav-wordmark,
+.nav:not(.scrolled) .nav-links a { color: var(--paper); }
+.nav:not(.scrolled) .nav-links a.nav-cta:hover { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+.nav-progress {
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--gold);
+  transform-origin: left;
+  transform: scaleX(var(--sp, 0));
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.nav.scrolled .nav-progress { opacity: 1; }
+
+/* ——— Hero ——— */
+.hero-pin { position: relative; background: var(--paper); }
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 140px 24px 120px;
+  color: var(--paper);
+  overflow: hidden;
+}
+.hero-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ink) url('assets/estate-aerial.jpg') center / cover no-repeat;
+}
+.hero-media { width: 100%; height: 100%; object-fit: cover; }
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28, 26, 23, 0.32) 0%, rgba(28, 26, 23, 0.18) 45%, rgba(28, 26, 23, 0.42) 100%);
+}
+.hero-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+.monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-family: var(--display);
+  font-size: 25px;
+  line-height: 1;
+  user-select: none;
+}
+.hero .eyebrow { display: flex; align-items: center; gap: 20px; margin-top: 36px; color: var(--paper-deep); }
+.hero .eyebrow::before, .hero .eyebrow::after { content: ""; width: 48px; height: 1px; background: rgba(247, 244, 238, 0.6); }
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(42px, 6.4vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  max-width: 15ch;
+  margin-top: 32px;
+  text-wrap: balance;
+}
+.hero h1 .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.hero h1 .w > span { display: inline-block; }
+.hero .hero-line { margin-top: 28px; font-size: 21px; max-width: 46ch; color: var(--paper-deep); }
+.hero-cta { margin-top: 48px; display: flex; flex-direction: column; align-items: center; }
+.hero-note { margin-top: 16px; font-size: 16px; font-style: italic; color: var(--paper-deep); }
+.hero-credit { position: absolute; right: 22px; bottom: 18px; z-index: 2; font-size: 13px; font-style: italic; color: var(--paper-deep); opacity: 0.8; }
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  z-index: 2;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--paper-deep);
+}
+.scroll-cue .line { width: 1px; height: 44px; background: rgba(247, 244, 238, 0.35); position: relative; overflow: hidden; }
+.scroll-cue .line::after { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 100%; background: var(--paper); animation: cue 2.4s var(--ease) infinite; }
+@keyframes cue { 0% { transform: translateY(-100%); } 60%, 100% { transform: translateY(100%); } }
+
+html.motion .hero-pin { height: 175vh; }
+html.motion .hero { position: sticky; top: 0; height: 100vh; height: 100svh; }
+html.motion .hero-frame {
+  clip-path: inset(calc(var(--hp, 0) * 9vh) calc(var(--hp, 0) * 8vw) round calc(var(--hp, 0) * 36px));
+  will-change: clip-path;
+}
+html.motion .hero-media { transform: scale(calc(1.14 - var(--hp, 0) * 0.14)); will-change: transform; }
+html.motion .hero-content { opacity: calc(1 - var(--hp, 0) * 2.2); transform: translateY(calc(var(--hp, 0) * -90px)); }
+html.motion .scroll-cue, html.motion .hero-credit { opacity: calc(1 - var(--hp, 0) * 4); }
+html.motion .hero-after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: clamp(0, calc((var(--hp, 0) - 0.55) * 3), 1);
+}
+.hero-after { display: none; }
+html.motion .hero-after { display: flex; }
+.hero-after p {
+  font-family: var(--body);
+  font-style: italic;
+  font-size: clamp(30px, 4.2vw, 64px);
+  line-height: 1.1;
+  color: var(--paper);
+  text-shadow: 0 2px 30px rgba(28, 26, 23, 0.35);
+  transform: translateY(calc((1 - var(--hp, 0)) * 40px));
+}
+
+/* Load sequence */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-seq { animation: rise 1100ms var(--ease) both; }
+  .hero-seq.s1 { animation-delay: 150ms; }
+  .hero-seq.s2 { animation-delay: 300ms; }
+  .hero-seq.s4 { animation-delay: 1100ms; }
+  .hero-seq.s5 { animation-delay: 1300ms; }
+  html.motion .hero h1 .w > span { animation: word 1200ms var(--ease) both; animation-delay: calc(450ms + var(--i) * 70ms); }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes word { from { transform: translateY(105%) rotate(4deg); } to { transform: none; } }
+
+/* ——— Marquee ——— */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--gold-soft);
+  border-bottom: 1px solid var(--gold-soft);
+  padding: 22px 0;
+  background: var(--paper);
+}
+.marquee-track { display: flex; width: max-content; }
+.marquee-track span {
+  font-family: var(--body);
+  font-style: italic;
+  font-size: clamp(24px, 2.6vw, 38px);
+  white-space: nowrap;
+  padding-right: 0.6em;
+  color: var(--ink);
+}
+.marquee-track span i { font-style: normal; color: var(--gold); padding: 0 0.6em; }
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track { animation: marquee 60s linear infinite; }
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ——— The idea: scroll-lit statements ——— */
+.idea { padding: clamp(120px, 16vw, 220px) 0 clamp(100px, 12vw, 180px); }
+.idea .wrap { max-width: 1180px; }
+.lit {
+  font-family: var(--display);
+  font-size: clamp(30px, 3.9vw, 58px);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+.lit + .lit { margin-top: 0.9em; }
+.lit em { font-family: var(--body); font-style: italic; }
+html.motion .lit .lw { opacity: 0.14; transition: opacity 500ms ease, color 500ms ease; }
+html.motion .lit .lw.on { opacity: 1; }
+.idea-foot { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-top: 96px; flex-wrap: wrap; }
+.idea-foot p { max-width: 38ch; color: var(--ink-soft); }
+
+/* ——— Window: arch opening to full bleed ——— */
+.window { position: relative; }
+.window-stage { position: relative; height: 100vh; height: 100svh; overflow: hidden; }
+.window-frame { position: absolute; inset: 0; overflow: hidden; }
+.window-frame img { width: 100%; height: 100%; object-fit: cover; }
+.window-caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 9vh;
+  text-align: center;
+  color: var(--paper);
+  z-index: 2;
+}
+.window-caption p { font-style: italic; font-size: clamp(28px, 3.6vw, 54px); line-height: 1.1; text-shadow: 0 2px 30px rgba(28, 26, 23, 0.4); }
+.window-caption .caps { display: block; margin-top: 14px; color: var(--paper-deep); }
+html.motion .window { height: 230vh; }
+html.motion .window-stage { position: sticky; top: 0; }
+html.motion .window-frame {
+  clip-path: inset(calc((1 - var(--wp, 0)) * 16vh) calc((1 - var(--wp, 0)) * 34vw) 0 calc((1 - var(--wp, 0)) * 34vw) round calc((1 - var(--wp, 0)) * 40vw) calc((1 - var(--wp, 0)) * 40vw) 0 0);
+  will-change: clip-path;
+}
+html.motion .window-frame img { transform: scale(calc(1.25 - var(--wp, 0) * 0.25)); will-change: transform; }
+html.motion .window-caption { opacity: clamp(0, calc((var(--wp, 0) - 0.75) * 5), 1); transform: translateY(calc((1 - var(--wp, 0)) * 50px)); }
+.window-overline {
+  position: absolute;
+  top: 9vh; left: 0; right: 0;
+  text-align: center;
+  z-index: 2;
+  color: var(--ink-soft);
+}
+html.motion .window-overline { opacity: clamp(0, calc(1 - var(--wp, 0) * 3), 1); }
+.window-overline { display: none; }
+html.motion .window-overline { display: block; }
+
+/* ——— A day: pinned horizontal ——— */
+.day { --day-bg: #F2E6D4; --day-ink: var(--ink); --day-soft: var(--ink-soft); background: var(--day-bg); color: var(--day-ink); }
+.day-stage { position: relative; overflow: hidden; }
+.day-head { padding: clamp(100px, 12vw, 160px) var(--gutter) 40px; }
+.day-head h2 { max-width: 14ch; }
+.day-head .label { color: var(--day-soft); }
+.day-track { display: grid; gap: 64px; padding: 40px var(--gutter) 120px; }
+.panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.panel figure { position: relative; overflow: hidden; border-radius: 999px 999px 6px 6px; aspect-ratio: 3 / 4; background: rgba(28, 26, 23, 0.08); }
+.panel figure img { width: 100%; height: 100%; object-fit: cover; }
+.panel .when { display: flex; align-items: baseline; gap: 16px; color: var(--day-soft); }
+.panel .when .n { font-family: var(--display); font-size: 18px; color: var(--gold); }
+.panel h3 { font-family: var(--body); font-style: italic; font-weight: 400; font-size: clamp(56px, 7vw, 112px); line-height: 0.95; letter-spacing: -0.02em; margin-top: 4px; }
+.panel p { font-size: clamp(19px, 1.6vw, 23px); max-width: 30ch; color: var(--day-ink); }
+.sky { display: none; }
+
+html.motion .day.pinned .day-stage { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; flex-direction: column; }
+html.motion .day.pinned .day-head { padding: clamp(84px, 11vh, 120px) var(--gutter) 0; position: relative; z-index: 2; }
+html.motion .day.pinned .day-head h2 { font-size: clamp(36px, 4.2vw, 64px); }
+html.motion .day.pinned .day-track {
+  display: flex;
+  gap: 0;
+  padding: 0;
+  flex: 1;
+  align-items: center;
+  width: max-content;
+  transform: translate3d(calc(var(--dx, 0) * -1px), 0, 0);
+  will-change: transform;
+  position: relative;
+  z-index: 2;
+}
+html.motion .day.pinned .panel {
+  width: min(86vw, 980px);
+  padding: 0 var(--gutter);
+  grid-template-columns: minmax(180px, 34vh) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(28px, 4vw, 64px);
+}
+html.motion .day.pinned .panel:first-child { padding-left: var(--gutter); }
+html.motion .day.pinned .panel:last-child { width: min(100vw, 1060px); }
+html.motion .day.pinned .panel figure { height: min(52vh, 520px); aspect-ratio: 3 / 4; width: auto; }
+html.motion .day.pinned .panel figure img { transform: scale(1.12) translateX(calc(var(--px, 0) * 1%)); }
+html.motion .day.pinned .sky { display: block; position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.sun, .moon {
+  position: absolute;
+  width: 54px; height: 54px;
+  margin: -27px 0 0 -27px;
+  border-radius: 50%;
+  left: calc(var(--sx, 10) * 1%);
+  top: calc(var(--sy, 60) * 1%);
+}
+.sun { background: radial-gradient(circle, #F4C77B 0%, #E9A85A 55%, rgba(233, 168, 90, 0) 72%); box-shadow: 0 0 80px 30px rgba(244, 199, 123, 0.35); opacity: var(--sun, 1); }
+.moon { left: 84%; top: 22%; background: #EDE6D6; box-shadow: 0 0 60px 12px rgba(237, 230, 214, 0.18); opacity: var(--moon, 0); overflow: hidden; }
+.moon::after { content: ""; position: absolute; width: 100%; height: 100%; border-radius: 50%; background: var(--day-bg); left: 30%; top: -12%; }
+.stars { position: absolute; inset: 0; opacity: var(--moon, 0); background-image:
+  radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 28% 9%, #fff 50%, transparent 51%),
+  radial-gradient(1.5px 1.5px at 44% 24%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 63% 12%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 72% 30%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 91% 8%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 55% 6%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 36% 33%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 7% 36%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 83% 40%, #fff 50%, transparent 51%),
+  radial-gradient(1px 1px at 20% 28%, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 97% 26%, #fff 50%, transparent 51%); }
+.day-progress { display: none; }
+html.motion .day.pinned .day-progress {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  left: var(--gutter);
+  bottom: 28px;
+  z-index: 3;
+  align-items: center;
+  color: var(--day-soft);
+}
+.day-progress .bar { width: 120px; height: 1px; background: var(--gold-soft); position: relative; }
+.day-progress .bar::after { content: ""; position: absolute; inset: 0; background: var(--gold); transform-origin: left; transform: scaleX(var(--dp, 0)); }
+
+/* ——— The estate ——— */
+.estate { padding: clamp(120px, 14vw, 200px) 0; }
+.estate-intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: end; margin-bottom: clamp(64px, 8vw, 120px); }
+.estate-intro p { color: var(--ink-soft); max-width: 40ch; }
+.estate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 110px); }
+.estate-visual { position: sticky; top: 12vh; height: 76vh; border-radius: 999px 999px 8px 8px; overflow: hidden; background: var(--paper-deep); }
+.estate-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 900ms var(--ease), transform 1600ms var(--ease);
+}
+.estate-visual img.on { opacity: 1; transform: scale(1); }
+.estate-visual .tag {
+  position: absolute;
+  left: 50%; bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: var(--paper);
+  background: rgba(28, 26, 23, 0.32);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 999px;
+  padding: 8px 16px;
+  white-space: nowrap;
+}
+.fact { min-height: 76vh; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--gold-soft); padding: 48px 0; }
+.fact:last-child { border-bottom: 1px solid var(--gold-soft); }
+.fact .fig { font-family: var(--display); font-size: clamp(84px, 10vw, 156px); line-height: 0.9; letter-spacing: -0.03em; color: var(--claret); font-variant-numeric: lining-nums; }
+.fact .fig small { display: block; font-family: var(--body); font-style: italic; font-size: clamp(24px, 2.2vw, 32px); line-height: 1.2; letter-spacing: 0; color: var(--ink); margin-top: 14px; }
+.fact .caps { color: var(--ink-soft); margin-top: 28px; }
+.fact p { margin-top: 12px; font-size: 21px; max-width: 34ch; }
+.fact .mob { display: none; }
+
+/* ——— Membership ——— */
+.members { background: var(--night); color: var(--paper); padding: clamp(120px, 14vw, 200px) 0; position: relative; overflow: hidden; }
+.members::before {
+  content: "";
+  position: absolute;
+  width: 80vw; height: 80vw;
+  left: 50%; top: -30vw;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(94, 26, 36, 0.55), rgba(94, 26, 36, 0) 60%);
+  pointer-events: none;
+}
+.members .wrap { position: relative; }
+.members-head { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: end; }
+.members-head p { color: rgba(247, 244, 238, 0.72); max-width: 40ch; }
+.forms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: clamp(64px, 7vw, 100px); }
+.form-card {
+  position: relative;
+  border: 1px solid rgba(169, 142, 91, 0.35);
+  border-radius: 6px;
+  padding: 36px 32px 34px;
+  overflow: hidden;
+  transition: border-color 500ms var(--ease), transform 700ms var(--ease);
+}
+.form-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, -20%), rgba(169, 142, 91, 0.16), transparent 60%);
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+.form-card:hover { border-color: rgba(169, 142, 91, 0.8); transform: translateY(-6px); }
+.form-card:hover::before { opacity: 1; }
+.form-card .top { display: flex; justify-content: space-between; align-items: baseline; }
+.form-card .num { font-family: var(--display); font-size: 22px; color: var(--gold); }
+.form-card .places { color: rgba(247, 244, 238, 0.65); }
+.form-card h3 { font-family: var(--body); font-style: italic; font-weight: 400; font-size: clamp(30px, 2.6vw, 40px); line-height: 1.05; margin-top: 48px; }
+.form-card .price { font-family: var(--display); font-size: clamp(44px, 4.4vw, 68px); line-height: 1; letter-spacing: -0.02em; margin-top: 18px; font-variant-numeric: lining-nums tabular-nums; }
+.form-card .price small { display: block; font-family: var(--body); font-size: 15px; letter-spacing: 0.02em; color: rgba(247, 244, 238, 0.6); margin-top: 10px; font-style: italic; }
+.form-card ul { list-style: none; margin-top: 32px; border-top: 1px solid rgba(169, 142, 91, 0.3); }
+.form-card li { padding: 12px 0; border-bottom: 1px solid rgba(169, 142, 91, 0.18); font-size: 17px; color: rgba(247, 244, 238, 0.85); }
+.dots { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 28px; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--gold); }
+html.motion .dots i { opacity: 0; transform: scale(0.3); transition: opacity 500ms ease, transform 600ms var(--ease); transition-delay: calc(var(--d) * 45ms + 200ms); }
+html.motion .in .dots i { opacity: 1; transform: none; }
+.members-foot { display: flex; justify-content: space-between; align-items: center; gap: 32px; margin-top: 64px; flex-wrap: wrap; }
+.members-foot p { color: rgba(247, 244, 238, 0.72); max-width: 56ch; }
+
+/* ——— Stewardship ——— */
+.stewardship { padding: clamp(120px, 14vw, 200px) 0; text-align: center; background: var(--paper-deep); }
+.statement { font-family: var(--display); font-size: clamp(36px, 5vw, 76px); line-height: 1.05; letter-spacing: -0.01em; max-width: 18ch; margin: 0 auto; text-wrap: balance; }
+.stewardship .prose { max-width: 52ch; margin: 48px auto 0; color: var(--ink-soft); }
+.stewardship .prose p + p { margin-top: 1em; }
+
+/* ——— Calendar ——— */
+.calendar { padding: clamp(120px, 14vw, 200px) 0; }
+.timeline { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 72px; }
+.timeline::before, .timeline::after { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 1px; }
+.timeline::before { background: var(--gold-soft); }
+.timeline::after { background: var(--claret); transform-origin: left; transform: scaleX(var(--cp, 1)); }
+.stop { position: relative; padding-right: 40px; }
+.stop .dot { width: 23px; height: 23px; border-radius: 50%; border: 1px solid var(--claret); background: var(--paper); position: relative; z-index: 1; display: grid; place-items: center; }
+.stop .dot::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--claret); transform: scale(1); transition: transform 600ms var(--ease); }
+html.motion .stop:not(.on) .dot::after { transform: scale(0); }
+.stop .when { font-family: var(--display); font-size: clamp(36px, 4vw, 60px); line-height: 1; margin-top: 40px; letter-spacing: -0.01em; }
+.stop p { margin-top: 18px; max-width: 26ch; font-size: 20px; }
 
 /* ——— Questions ——— */
-.faq-list { max-width: 680px; margin: 0 auto; border-top: 1px solid var(--gold-line); }
-.faq details { border-bottom: 1px solid var(--gold-line); padding: 26px 8px; }
+.faq { padding: clamp(120px, 14vw, 200px) 0; border-top: 1px solid var(--gold-soft); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(40px, 6vw, 110px); }
+.faq-side { position: sticky; top: 18vh; align-self: start; }
+.faq-list { border-top: 1px solid var(--gold-soft); }
+.faq details { border-bottom: 1px solid var(--gold-soft); }
 .faq summary {
   cursor: pointer;
   list-style: none;
   font-family: var(--display);
-  font-size: 22px;
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.25;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 24px;
+  padding: 30px 0;
+  transition: color 300ms ease;
 }
+.faq summary:hover { color: var(--claret); }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; color: var(--claret); flex: none; }
-.faq details[open] summary::after { content: "\2212"; }
-.faq details p { margin-top: 14px; color: var(--ink-soft); }
-
-/* ——— Headings ——— */
-h2 {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 1.1;
+.faq .pm { flex: none; width: 34px; height: 34px; border: 1px solid var(--gold); border-radius: 50%; position: relative; transition: transform 500ms var(--ease), background 300ms ease; }
+.faq .pm::before, .faq .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1px; background: var(--claret); transform: translate(-50%, -50%); }
+.faq .pm::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform 500ms var(--ease); }
+.faq details[open] .pm { transform: rotate(180deg); }
+.faq details[open] .pm::after { transform: translate(-50%, -50%) rotate(0deg); }
+.faq details p { padding: 0 60px 32px 0; color: var(--ink-soft); font-size: 20px; }
+@supports (interpolate-size: allow-keywords) {
+  .faq { interpolate-size: allow-keywords; }
+  .faq details::details-content { height: 0; overflow: clip; transition: height 600ms var(--ease), content-visibility 600ms allow-discrete; }
+  .faq details[open]::details-content { height: auto; }
 }
-
-/* ——— The estate ——— */
-.estate-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
-  align-items: center;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.estate-frame {
-  background: var(--paper-deep);
-  border: 1px solid var(--gold-line);
-  aspect-ratio: 4 / 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.facts dt { color: var(--ink-soft); }
-.facts dd { margin-top: 10px; }
-.facts dd + dt { margin-top: 44px; }
-
-/* ——— Membership ——— */
-.ledger {
-  list-style: none;
-  max-width: 760px;
-  margin: 72px auto 0;
-  border-top: 1px solid var(--gold-line);
-}
-.ledger .entry {
-  display: grid;
-  grid-template-columns: 56px 1fr auto;
-  grid-template-areas: "num name price" "num places price";
-  align-items: baseline;
-  column-gap: 24px;
-  padding: 32px 8px;
-  border-bottom: 1px solid var(--gold-line);
-}
-.ledger .numeral {
-  grid-area: num;
-  font-family: var(--display);
-  font-size: 26px;
-  color: var(--claret);
-}
-.ledger .name { grid-area: name; color: var(--ink); }
-.ledger .places { grid-area: places; margin-top: 6px; color: var(--ink-soft); font-style: italic; }
-.ledger .places:empty { display: none; }
-.ledger .price {
-  grid-area: price;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 1.1;
-  font-variant-numeric: oldstyle-nums;
-}
-.tiers-after { margin-top: 64px; text-align: center; color: var(--ink-soft); max-width: 62ch; margin-left: auto; margin-right: auto; }
-
-/* ——— Calendar ——— */
-.timeline {
-  display: flex;
-  justify-content: center;
-  max-width: 860px;
-  margin: 0 auto;
-}
-.timeline .moment {
-  flex: 1;
-  text-align: center;
-  padding: 8px 40px;
-}
-.timeline .moment + .moment { border-left: 1px solid var(--gold-line); }
-.timeline .moment p { margin-top: 16px; }
-.timeline .caps { color: var(--ink-soft); }
 
 /* ——— Request ——— */
-.request h2 { text-align: center; }
-.request .request-line { margin-top: 24px; text-align: center; color: var(--ink-soft); }
-.form-wrap { max-width: 480px; margin: 64px auto 0; }
-.field { margin-bottom: 40px; }
-.field label { display: block; color: var(--ink-soft); margin-bottom: 12px; }
-.field input,
-.field select,
-.field textarea {
+.request { padding: clamp(120px, 14vw, 200px) 0; background: var(--paper-deep); }
+.request-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 120px); }
+.request-side { position: sticky; top: 18vh; align-self: start; }
+.request .request-line { margin-top: 28px; color: var(--ink-soft); max-width: 40ch; }
+.field { margin-bottom: 36px; position: relative; }
+.field label { display: block; color: var(--ink-soft); margin-bottom: 8px; }
+.field input, .field select, .field textarea {
   width: 100%;
-  background: var(--paper-deep);
+  background: transparent;
   border: none;
-  border-bottom: 1px solid var(--ink-soft);
-  border-radius: 2px 2px 0 0;
+  border-bottom: 1px solid rgba(92, 86, 77, 0.45);
+  border-radius: 0;
   font-family: var(--body);
-  font-size: 17px;
+  font-size: 22px;
   color: var(--ink);
-  padding: 14px 16px;
-  transition: border-color 200ms ease;
+  padding: 10px 0 12px;
   resize: vertical;
+  background-image: linear-gradient(var(--claret), var(--claret));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 600ms var(--ease);
 }
-.field input:focus,
-.field select:focus,
-.field textarea:focus { outline: none; border-bottom-color: var(--claret); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; background-size: 100% 1px; }
 .field select {
   appearance: none;
   -webkit-appearance: none;
   cursor: pointer;
-  background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%), linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
-  background-position: calc(100% - 22px) 50%, calc(100% - 16px) 50%;
-  background-size: 6px 6px;
-  background-repeat: no-repeat;
+  background-image: linear-gradient(var(--claret), var(--claret)), linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%), linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+  background-size: 0% 1px, 6px 6px, 6px 6px;
+  background-position: 0 100%, calc(100% - 12px) 50%, calc(100% - 6px) 50%;
 }
-.field.invalid input,
-.field.invalid textarea { border-bottom-color: var(--claret); }
-.field .error {
-  display: none;
-  margin-top: 10px;
-  font-size: 16px;
-  color: var(--claret);
-}
+.field select:focus { background-size: 100% 1px, 6px 6px, 6px 6px; }
+.field.invalid input, .field.invalid textarea { border-bottom-color: var(--claret); }
+.field .error { display: none; margin-top: 8px; font-size: 16px; color: var(--claret); }
 .field.invalid .error { display: block; }
-.form-error {
-  margin-top: 32px;
-  text-align: center;
-  font-size: 17px;
-  color: var(--claret);
-}
-.form-actions { text-align: center; margin-top: 56px; }
+.form-error { margin-top: 28px; font-size: 17px; color: var(--claret); }
+.form-error a { border-bottom: 1px solid var(--claret); }
+.form-actions { margin-top: 48px; }
 .field-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.confirmation { text-align: center; padding: 48px 0; }
-.confirmation p { margin-top: 32px; color: var(--ink-soft); }
-.confirm-title { font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1.2; margin-top: 32px; }
-.confirm-actions { margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-.confirm-pdf { font-size: 17px; border-bottom: 1px solid var(--claret); }
+.confirmation { padding: 24px 0; color: var(--claret); }
+.confirmation p { margin-top: 28px; color: var(--ink-soft); }
+.confirm-title { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 3vw, 44px); line-height: 1.1; margin-top: 28px; color: var(--ink); }
+.confirm-actions { margin-top: 32px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.confirm-pdf { font-size: 18px; border-bottom: 1px solid var(--claret); }
 
 /* ——— Footer ——— */
-.footer {
-  background: var(--paper-deep);
-  text-align: center;
-  padding: 120px 24px 96px;
+.footer { background: var(--night); color: var(--paper); padding: clamp(80px, 10vw, 140px) 0 36px; overflow: hidden; }
+.footer-top { display: flex; justify-content: space-between; align-items: end; gap: 40px; flex-wrap: wrap; }
+.footer-top .statement { color: var(--paper); text-align: left; margin: 0; font-size: clamp(32px, 3.6vw, 54px); max-width: 16ch; }
+.footer a { color: var(--paper); border-bottom: 1px solid rgba(247, 244, 238, 0.35); transition: border-color 300ms ease; }
+.footer a:hover { border-color: var(--paper); }
+.wordmark {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--display);
+  font-size: clamp(72px, 19.5vw, 330px);
+  line-height: 0.8;
+  letter-spacing: 0;
+  margin-top: clamp(64px, 9vw, 140px);
+  color: var(--paper);
+  overflow: hidden;
+  padding-top: 0.06em;
 }
-.footer .caps { display: block; }
-.footer .f-name { margin-top: 32px; color: var(--ink); }
-.footer .f-place { margin-top: 16px; color: var(--ink-soft); }
-.footer .f-mail { display: inline-block; margin-top: 32px; }
-.footer .f-copy { margin-top: 64px; color: var(--ink-soft); }
+.wordmark span { display: inline-block; }
+html.motion .wordmark span { transform: translateY(100%); transition: transform 1400ms var(--ease); transition-delay: calc(var(--i) * 70ms); }
+html.motion .wordmark.in span { transform: none; }
+.footer-base { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(169, 142, 91, 0.35); color: rgba(247, 244, 238, 0.6); }
 
-/* ——— Tonal movements ——— */
-.stewardship { background: var(--paper-deep); }
-
-/* ——— Motion ——— */
-@media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
-  .hero-seq { animation: rise 600ms ease-out both; }
-  .hero-seq:nth-child(1) { animation-delay: 100ms; }
-  .hero-seq:nth-child(2) { animation-delay: 250ms; }
-  .hero-seq:nth-child(3) { animation-delay: 400ms; }
-  .hero-seq:nth-child(4) { animation-delay: 550ms; }
-  .hero-seq:nth-child(5) { animation-delay: 700ms; }
-}
-@keyframes rise {
-  from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; }
-}
-html.motion .reveal {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 500ms ease-out, transform 500ms ease-out;
-}
-html.motion .reveal.revealed { opacity: 1; transform: none; }
+/* ——— Generic reveals ——— */
+html.motion .rv { opacity: 0; transform: translateY(36px); transition: opacity 1100ms var(--ease), transform 1100ms var(--ease); transition-delay: calc(var(--rd, 0) * 1ms); }
+html.motion .rv.in { opacity: 1; transform: none; }
+html.motion .mask { clip-path: inset(0 0 100% 0); transition: clip-path 1400ms var(--ease); }
+html.motion .mask.in { clip-path: inset(0 0 0 0); }
 
 /* ——— Responsive ——— */
-@media (max-width: 900px) {
-  .estate-grid { grid-template-columns: 1fr; gap: 56px; max-width: 560px; }
+@media (max-width: 960px) {
+  .estate-intro, .members-head, .faq-grid, .request-grid { grid-template-columns: 1fr; gap: 36px; }
+  .estate-grid { grid-template-columns: 1fr; }
+  .estate-visual { display: none; }
+  .fact { min-height: 0; padding: 40px 0 56px; }
+  .fact .mob { display: block; border-radius: 999px 999px 6px 6px; overflow: hidden; aspect-ratio: 4 / 5; margin-bottom: 36px; max-width: 520px; }
+  .fact .mob img { width: 100%; height: 100%; object-fit: cover; }
+  .forms { grid-template-columns: 1fr; max-width: 560px; }
+  .faq-side, .request-side { position: static; }
 }
 @media (max-width: 760px) {
   body { font-size: 18px; }
-  section { padding: 96px 20px; }
-  .hero { padding: 120px 20px 96px; }
-  .hero h1 { font-size: 40px; }
-  .section-head { margin-bottom: 56px; }
-  .timeline { flex-direction: column; max-width: 480px; }
-  .timeline .moment { padding: 40px 8px; }
-  .timeline .moment + .moment { border-left: none; border-top: 1px solid var(--gold-line); }
-  .nav { padding: 18px 20px; }
-  .appellation::before, .appellation::after { width: 40px; }
-  .divider { margin-top: 64px; }
-  .moments { grid-template-columns: 1fr; max-width: 480px; }
-  .moments li { padding: 32px 8px; }
-  .moments li + li { border-left: none; border-top: 1px solid var(--gold-line); }
-  .faq summary { font-size: 20px; }
-  .ledger .entry { grid-template-columns: 40px 1fr; grid-template-areas: "num name" "num places" "num price"; }
-  .ledger .price { margin-top: 12px; font-size: 26px; }
-}
-@media (max-width: 600px) {
+  .btn { padding: 16px 22px; font-size: 12px; letter-spacing: 0.16em; gap: 10px; }
   .nav-links .mid { display: none; }
-  .nav-cta { margin-left: 0; }
+  .hero .hero-line { font-size: 19px; }
+  .hero-credit { display: none; }
+  html.motion .hero-frame { clip-path: inset(calc(var(--hp, 0) * 7vh) calc(var(--hp, 0) * 5vw) round calc(var(--hp, 0) * 24px)); }
+  html.motion .window-frame { clip-path: inset(calc((1 - var(--wp, 0)) * 14vh) calc((1 - var(--wp, 0)) * 18vw) 0 calc((1 - var(--wp, 0)) * 18vw) round calc((1 - var(--wp, 0)) * 50vw) calc((1 - var(--wp, 0)) * 50vw) 0 0); }
+  html.motion .day.pinned .panel { width: 100vw; grid-template-columns: 1fr; align-items: start; gap: 22px; }
+  html.motion .day.pinned .panel:last-child { width: 100vw; }
+  html.motion .day.pinned .panel figure { height: 34vh; max-width: 70vw; }
+  html.motion .day.pinned .panel h3 { font-size: 52px; }
+  html.motion .day.pinned .panel p { font-size: 18px; }
+  .timeline { grid-template-columns: 1fr; gap: 56px; }
+  .timeline::before, .timeline::after { left: 11px; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+  .timeline::after { transform-origin: top; transform: scaleY(var(--cp, 1)); }
+  .stop { padding: 0 0 0 56px; }
+  .stop .dot { position: absolute; left: 0; top: 4px; }
+  .stop .when { margin-top: 0; }
+  .faq details p { padding-right: 0; }
+  .form-card:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-media { display: none; }
+  html { scroll-behavior: auto; }
 }
 </style>
 </head>
-<body class="media-hero">
+<body>
 
 <nav class="nav" id="nav" aria-label="Main">
   <a class="nav-wordmark" href="#top">REFUGE</a>
   <div class="nav-links caps">
-    <a class="mid" href="#estate">The estate</a><span class="sep mid" aria-hidden="true">·</span><a class="mid" href="#membership">Membership</a><span class="sep mid" aria-hidden="true">·</span><a class="mid" href="#questions">Questions</a><a class="nav-cta" href="#request">Founding pack</a>
+    <a class="mid" href="#day">A day</a>
+    <a class="mid" href="#estate">The estate</a>
+    <a class="mid" href="#membership">Membership</a>
+    <a class="mid" href="#questions">Questions</a>
+    <a class="nav-cta" href="#request">Founding pack</a>
   </div>
+  <span class="nav-progress" aria-hidden="true"></span>
 </nav>
 
-<header class="hero has-media" id="top">
-  <video class="hero-media" autoplay muted loop playsinline preload="auto" poster="assets/estate-aerial.jpg" aria-hidden="true" tabindex="-1">
-    <source src="assets/estate-aerial.mp4" type="video/mp4">
-  </video>
-  <div class="hero-scrim" aria-hidden="true"></div>
-  <span class="hero-credit">An impression of the estate</span>
-  <span class="monogram hero-seq" aria-hidden="true">R</span>
-  <div class="appellation hero-seq"><span class="caps">Near Saint-Émilion · Bordeaux · Opening 2027</span></div>
-  <h1 class="hero-seq">The next 20 years don&rsquo;t have to look like the last&nbsp;10.</h1>
-  <p class="hero-line hero-seq">A self-sufficient private estate on Bordeaux&rsquo;s Right Bank, owned by 26 founding families. Somewhere to disconnect, among people who want the same things you&nbsp;do.</p>
-  <div class="hero-seq hero-cta">
-    <a class="btn btn-solid" href="#request">Request the founding pack</a>
-    <p class="hero-note">The founding pack arrives in your inbox straight away.</p>
-  </div>
-</header>
-
-<section id="idea">
-  <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">The idea</span></div>
-    <div class="prose">
-      <p>You built the company. You raised the round, ran the team, made the flight. The last ten years were spent at full speed, and your family felt it.</p>
-      <p>Refuge is the counterweight. An estate that is staffed, stocked and ready when you arrive, where the phones go in a drawer, the children run outside and dinner is a long table of people you&rsquo;re glad to see.</p>
-      <p>Not a hotel. Not a resort. Not a commune. Your lodge is private, you come and go as you please, and nobody tells you how to spend your days.</p>
+<div class="hero-pin" id="hero-pin">
+  <header class="hero" id="top">
+    <div class="hero-frame" aria-hidden="true">
+      <video class="hero-media" autoplay muted loop playsinline preload="auto" poster="assets/estate-aerial.jpg" tabindex="-1">
+        <source src="assets/estate-aerial.mp4" type="video/mp4">
+      </video>
+      <div class="hero-scrim"></div>
     </div>
-    <div class="divider" role="presentation"></div>
+    <div class="hero-after" aria-hidden="true"><p>Somewhere to disconnect.</p></div>
+    <div class="hero-content">
+      <span class="monogram hero-seq s1" aria-hidden="true">R</span>
+      <div class="eyebrow hero-seq s2"><span class="caps">Near Saint-Émilion · Bordeaux · Opening 2027</span></div>
+      <h1 id="hero-title">The next 20 years don&rsquo;t have to look like the last&nbsp;10.</h1>
+      <p class="hero-line hero-seq s4">A self-sufficient private estate on Bordeaux&rsquo;s Right Bank, owned by 26 founding families. Somewhere to disconnect, among people who want the same things you&nbsp;do.</p>
+      <div class="hero-cta hero-seq s5">
+        <a class="btn btn-light" href="#request">Request the founding pack <span class="arrow" aria-hidden="true">&rarr;</span></a>
+        <p class="hero-note">The founding pack arrives in your inbox straight away.</p>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span class="caps">Scroll</span><span class="line"></span></div>
+    <span class="hero-credit">An impression of the estate</span>
+  </header>
+</div>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Somewhere to disconnect <i>&#10022;</i> Twenty-six founding families <i>&#10022;</i> Near Saint-Émilion <i>&#10022;</i> Its own power, water and food <i>&#10022;</i> Opening 2027 <i>&#10022;</i></span>
+    <span>Somewhere to disconnect <i>&#10022;</i> Twenty-six founding families <i>&#10022;</i> Near Saint-Émilion <i>&#10022;</i> Its own power, water and food <i>&#10022;</i> Opening 2027 <i>&#10022;</i></span>
+  </div>
+</div>
+
+<section class="idea" id="idea">
+  <div class="wrap">
+    <div class="label rv"><span class="n">I</span><span class="t caps">The idea</span></div>
+    <p class="lit">You built the company. You raised the round, ran the team, made the flight. The last ten years were spent at full speed, and your family felt&nbsp;it.</p>
+    <p class="lit">Refuge is the counterweight. An estate that is staffed, stocked and ready when you arrive, where the phones go in a drawer, the children run outside and dinner is a long table of people you&rsquo;re glad to&nbsp;see.</p>
+    <p class="lit">Not a hotel. Not a resort. Not a commune. <em>Your lodge is private, you come and go as you please, and nobody tells you how to spend your&nbsp;days.</em></p>
+  </div>
+</section>
+
+<section class="window" id="window" aria-label="The Right Bank">
+  <div class="window-stage">
+    <span class="window-overline caps">Keep scrolling</span>
+    <div class="window-frame">
+      <img src="assets/estate-river.jpg" alt="Vineyards and lodges above a misty river bend at first light" loading="lazy">
+    </div>
+    <div class="window-caption">
+      <p>The Right Bank, at first light.</p>
+      <span class="caps">An impression of the estate</span>
+    </div>
   </div>
 </section>
 
 <section class="day" id="day">
-  <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">A day at Refuge</span></div>
-    <ol class="moments">
-      <li><span class="caps">Morning</span><p>Coffee on the terrace. Eggs from the estate&rsquo;s hens, bread from the oven. Nobody has a call at nine.</p></li>
-      <li><span class="caps">Midday</span><p>The children are in the orchard or the pool. You&rsquo;re on a bike between vineyards, or asleep in the shade.</p></li>
-      <li><span class="caps">Evening</span><p>One long table, food from the garden, wine from down the road. Conversation that isn&rsquo;t about work.</p></li>
-      <li><span class="caps">Night</span><p>No traffic, no glow on the horizon. The estate runs on its own power and water while you sleep.</p></li>
+  <div class="day-stage">
+    <div class="sky" aria-hidden="true"><div class="stars"></div><div class="sun"></div><div class="moon"></div></div>
+    <div class="day-head">
+      <div class="label"><span class="n">II</span><span class="t caps">A day at Refuge</span></div>
+      <h2 class="rv">A day, <em>unhurried.</em></h2>
+    </div>
+    <ol class="day-track" id="day-track">
+      <li class="panel">
+        <figure><img src="assets/day-morning.jpg" alt="Coffee on a terrace above the vineyards in morning mist" loading="lazy"></figure>
+        <div>
+          <div class="when"><span class="n">I</span><span class="caps">of IV</span></div>
+          <h3>Morning</h3>
+          <p>Coffee on the terrace. Eggs from the estate&rsquo;s hens, bread from the oven. Nobody has a call at nine.</p>
+        </div>
+      </li>
+      <li class="panel">
+        <figure><img src="assets/day-midday.jpg" alt="A child running between rows of fruit trees" loading="lazy"></figure>
+        <div>
+          <div class="when"><span class="n">II</span><span class="caps">of IV</span></div>
+          <h3>Midday</h3>
+          <p>The children are in the orchard or the pool. You&rsquo;re on a bike between vineyards, or asleep in the shade.</p>
+        </div>
+      </li>
+      <li class="panel">
+        <figure><img src="assets/day-evening.jpg" alt="A long table laid under stone arches at dusk" loading="lazy"></figure>
+        <div>
+          <div class="when"><span class="n">III</span><span class="caps">of IV</span></div>
+          <h3>Evening</h3>
+          <p>One long table, food from the garden, wine from down the road. Conversation that isn&rsquo;t about work.</p>
+        </div>
+      </li>
+      <li class="panel">
+        <figure><img src="assets/day-night.jpg" alt="A stone house under a sky full of stars" loading="lazy"></figure>
+        <div>
+          <div class="when"><span class="n">IV</span><span class="caps">of IV</span></div>
+          <h3>Night</h3>
+          <p>No traffic, no glow on the horizon. The estate runs on its own power and water while you sleep.</p>
+        </div>
+      </li>
     </ol>
+    <div class="day-progress caps" aria-hidden="true"><span>Dawn</span><span class="bar"></span><span>Night</span></div>
   </div>
 </section>
 
-<section id="estate">
-  <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">The estate</span></div>
+<section class="estate" id="estate">
+  <div class="wrap">
+    <div class="estate-intro">
+      <div>
+        <div class="label rv"><span class="n">III</span><span class="t caps">The estate</span></div>
+        <h2 class="rv">A domaine on the Right Bank, <em>made to look after itself.</em></h2>
+      </div>
+      <p class="rv" style="--rd:150">We are buying an existing estate, with a house and outbuildings, rather than building from scratch. Restored, then made self-sufficient.</p>
+    </div>
     <div class="estate-grid">
-      <div class="estate-frame"><span class="monogram gold" aria-hidden="true">R</span></div>
-      <dl class="facts">
-        <dt class="caps">Setting</dt>
-        <dd>A domaine of 6&ndash;10 hectares on Bordeaux&rsquo;s Right Bank, within half an hour of Saint-Émilion.</dd>
-        <dt class="caps">Self-sufficient</dt>
-        <dd>Solar and storage, its own borehole, a kitchen garden and orchard. The estate makes its own power, water and much of its food.</dd>
-        <dt class="caps">Lodges</dt>
-        <dd>A main house with fourteen lodges: six private, eight shared. Restored outbuildings and low-impact new builds.</dd>
-        <dt class="caps">Owned</dt>
-        <dd>Founding families own the estate itself, through shares that carry the right to use it. Owners, not guests.</dd>
-      </dl>
+      <div class="estate-visual" aria-hidden="true">
+        <img src="assets/estate-house.jpg" alt="" class="on" data-i="0">
+        <img src="assets/estate-river.jpg" alt="" data-i="1" loading="lazy">
+        <img src="assets/estate-lodges.jpg" alt="" data-i="2" loading="lazy">
+        <img src="assets/estate-terrace.jpg" alt="" data-i="3" loading="lazy">
+        <span class="tag caps">An impression of the estate</span>
+      </div>
+      <div class="facts">
+        <div class="fact" data-i="0">
+          <figure class="mob"><img src="assets/estate-house.jpg" alt="The main house with its pool and terraces among vineyards" loading="lazy"></figure>
+          <div class="fig rv">6&ndash;10<small>hectares</small></div>
+          <span class="caps">Setting</span>
+          <p class="rv">A domaine on Bordeaux&rsquo;s Right Bank, within half an hour of Saint-Émilion.</p>
+        </div>
+        <div class="fact" data-i="1">
+          <figure class="mob"><img src="assets/estate-river.jpg" alt="Vineyards above a river at first light" loading="lazy"></figure>
+          <div class="fig rv">Own<small>power, water, food</small></div>
+          <span class="caps">Self-sufficient</span>
+          <p class="rv">Solar and storage, its own borehole, a kitchen garden and orchard. The estate makes its own power, water and much of its food.</p>
+        </div>
+        <div class="fact" data-i="2">
+          <figure class="mob"><img src="assets/estate-lodges.jpg" alt="Lodges set among the vines" loading="lazy"></figure>
+          <div class="fig rv"><span class="count" data-to="14">14</span><small>lodges</small></div>
+          <span class="caps">Lodges</span>
+          <p class="rv">A main house with fourteen lodges: six private, eight shared. Restored outbuildings and low-impact new builds.</p>
+        </div>
+        <div class="fact" data-i="3">
+          <figure class="mob"><img src="assets/estate-terrace.jpg" alt="The house and terrace at dusk" loading="lazy"></figure>
+          <div class="fig rv"><span class="count" data-to="26">26</span><small>owners</small></div>
+          <span class="caps">Owned</span>
+          <p class="rv">Founding families own the estate itself, through shares that carry the right to use it. Owners, not guests.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="membership">
-  <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">Founding memberships</span></div>
-    <p class="prose">Twenty-six founding families, in three forms. Each carries a one-off founding contribution and an annual fee for staff and upkeep.</p>
-    <ol class="ledger">
-      <li class="entry">
-        <span class="numeral" aria-hidden="true">I</span>
-        <span class="name caps">Estate Partner</span>
-        <span class="places">Six places · your own lodge, designed with you · €18,000 a year</span>
-        <span class="price">€175,000</span>
-      </li>
-      <li class="entry">
-        <span class="numeral" aria-hidden="true">II</span>
-        <span class="name caps">Founding Partner</span>
-        <span class="places">Ten places · 28 nights a year in the shared lodges · €13,000 a year</span>
-        <span class="price">€90,000</span>
-      </li>
-      <li class="entry">
-        <span class="numeral" aria-hidden="true">III</span>
-        <span class="name caps">Member</span>
-        <span class="places">Ten places · 14 nights a year in the shared lodges · €10,000 a year</span>
-        <span class="price">€35,000</span>
-      </li>
-    </ol>
-    <p class="tiers-after">No money moves until a property is under offer and the founding group is formed. The founding pack sets out the numbers, the structure and the risks in full.</p>
-    <div class="section-cta"><a class="btn" href="#request">Request the founding pack</a></div>
+<section class="members on-dark" id="membership">
+  <div class="wrap">
+    <div class="members-head">
+      <div>
+        <div class="label rv"><span class="n">IV</span><span class="t caps">Founding memberships</span></div>
+        <h2 class="rv">Twenty-six families. <em>Three forms.</em></h2>
+      </div>
+      <p class="rv" style="--rd:150">Each carries a one-off founding contribution and an annual fee for staff and upkeep.</p>
+    </div>
+    <div class="forms">
+      <article class="form-card rv">
+        <div class="top"><span class="num">I</span><span class="places caps">Six places</span></div>
+        <h3>Estate Partner</h3>
+        <div class="price">&euro;175,000<small>then &euro;18,000 a year</small></div>
+        <ul>
+          <li>Your own lodge, designed with you</li>
+          <li>Unlimited nights, including summer</li>
+          <li>A seat on the estate council</li>
+        </ul>
+        <div class="dots" aria-hidden="true"><i style="--d:0"></i><i style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i></div>
+      </article>
+      <article class="form-card rv" style="--rd:120">
+        <div class="top"><span class="num">II</span><span class="places caps">Ten places</span></div>
+        <h3>Founding Partner</h3>
+        <div class="price">&euro;90,000<small>then &euro;13,000 a year</small></div>
+        <ul>
+          <li>28 nights a year in the shared lodges</li>
+          <li>Two weeks of summer, by ballot</li>
+          <li>A vote at the annual meeting</li>
+        </ul>
+        <div class="dots" aria-hidden="true"><i style="--d:0"></i><i style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i></div>
+      </article>
+      <article class="form-card rv" style="--rd:240">
+        <div class="top"><span class="num">III</span><span class="places caps">Ten places</span></div>
+        <h3>Member</h3>
+        <div class="price">&euro;35,000<small>then &euro;10,000 a year</small></div>
+        <ul>
+          <li>14 nights a year in the shared lodges</li>
+          <li>One week of summer, by ballot</li>
+          <li>A vote at the annual meeting</li>
+        </ul>
+        <div class="dots" aria-hidden="true"><i style="--d:0"></i><i style="--d:1"></i><i style="--d:2"></i><i style="--d:3"></i><i style="--d:4"></i><i style="--d:5"></i><i style="--d:6"></i><i style="--d:7"></i><i style="--d:8"></i><i style="--d:9"></i></div>
+      </article>
+    </div>
+    <div class="members-foot rv">
+      <p>No money moves until a property is under offer and the founding group is formed. The founding pack sets out the numbers, the structure and the risks in full.</p>
+      <a class="btn btn-light" href="#request">Request the founding pack <span class="arrow" aria-hidden="true">&rarr;</span></a>
+    </div>
   </div>
 </section>
 
 <section class="stewardship" id="stewardship">
-  <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">Who runs it</span></div>
-    <div class="prose">
+  <div class="wrap">
+    <div class="label center rv"><span class="n">V</span><span class="t caps">Who runs it</span></div>
+    <p class="statement rv">Run full-time by a founder. <em>Owned by its families.</em></p>
+    <div class="prose rv" style="--rd:150">
       <p>Refuge is run full-time by one of its founders, with an experienced estate manager and a small team alongside.</p>
       <p>The estate is owned by its families, overseen by a council they elect, and its accounts are open to every one of them.</p>
     </div>
   </div>
 </section>
 
-<section id="calendar">
-  <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">The calendar</span></div>
-    <div class="timeline">
-      <div class="moment">
-        <span class="caps">Now</span>
+<section class="calendar" id="calendar">
+  <div class="wrap">
+    <div class="label rv"><span class="n">VI</span><span class="t caps">The calendar</span></div>
+    <h2 class="rv">From first call <em>to first summer.</em></h2>
+    <div class="timeline" id="timeline">
+      <div class="stop" data-at="0.05">
+        <span class="dot"></span>
+        <div class="when">Now</div>
         <p>Founding conversations. A call, then a day with us in Bordeaux.</p>
       </div>
-      <div class="moment">
-        <span class="caps">Early 2027</span>
+      <div class="stop" data-at="0.4">
+        <span class="dot"></span>
+        <div class="when">Early 2027</div>
         <p>The estate is chosen and secured with the founding families.</p>
       </div>
-      <div class="moment">
-        <span class="caps">Late 2027</span>
+      <div class="stop" data-at="0.75">
+        <span class="dot"></span>
+        <div class="when">Late 2027</div>
         <p>The estate opens to its founding families.</p>
       </div>
     </div>
@@ -607,23 +956,26 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 </section>
 
 <section class="faq" id="questions">
-  <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">Questions</span></div>
-    <div class="faq-list">
+  <div class="wrap faq-grid">
+    <div class="faq-side">
+      <div class="label rv"><span class="n">VII</span><span class="t caps">Questions</span></div>
+      <h2 class="rv">The obvious ones, <em>answered.</em></h2>
+    </div>
+    <div class="faq-list rv">
       <details>
-        <summary>Is this a timeshare?</summary>
+        <summary>Is this a timeshare?<span class="pm" aria-hidden="true"></span></summary>
         <p>No. Founding families hold shares in the company that owns the estate, and the right to use it comes with those shares. You can sell them to an incoming family when you choose.</p>
       </details>
       <details>
-        <summary>Do we have to live there, or join in?</summary>
+        <summary>Do we have to live there, or join in?<span class="pm" aria-hidden="true"></span></summary>
         <p>No. Most families come for long weekends and a few weeks in summer. There is no programme and no rules about how you spend your time, beyond being good company.</p>
       </details>
       <details>
-        <summary>What happens to our money before the estate is bought?</summary>
+        <summary>What happens to our money before the estate is bought?<span class="pm" aria-hidden="true"></span></summary>
         <p>Nothing moves until a property is under offer and the founding group is formed. The first payment then sits in escrow, and comes back in full if the group doesn&rsquo;t close.</p>
       </details>
       <details>
-        <summary>Who decides who joins?</summary>
+        <summary>Who decides who joins?<span class="pm" aria-hidden="true"></span></summary>
         <p>Every new family meets the founders and spends a day on the estate. The families&rsquo; council approves each one.</p>
       </details>
     </div>
@@ -631,11 +983,13 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 </section>
 
 <section class="request" id="request">
-  <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">By invitation</span></div>
-    <h2>Request the founding pack.</h2>
-    <p class="request-line">Tell us briefly who you are. The founding pack arrives in your inbox straight away, and Dan Barnes, the founder, will be in touch personally to arrange a short introduction call.</p>
-    <div class="form-wrap">
+  <div class="wrap request-grid">
+    <div class="request-side">
+      <div class="label rv"><span class="n">VIII</span><span class="t caps">By invitation</span></div>
+      <h2 class="rv">Request the founding&nbsp;pack.</h2>
+      <p class="request-line rv" style="--rd:150">Tell us briefly who you are. The founding pack arrives in your inbox straight away, and Dan Barnes, the founder, will be in touch personally to arrange a short introduction call.</p>
+    </div>
+    <div class="form-wrap rv" style="--rd:200">
       <form id="request-form" novalidate>
         <div class="field" id="field-name-wrap">
           <label class="caps" for="field-name">Name</label>
@@ -665,7 +1019,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
           <input type="text" id="field-website" name="website" tabindex="-1" autocomplete="off">
         </div>
         <div class="form-actions">
-          <button class="btn btn-solid" type="submit" id="submit-btn">Request the founding pack</button>
+          <button class="btn btn-solid" type="submit" id="submit-btn">Request the founding pack <span class="arrow" aria-hidden="true">&rarr;</span></button>
         </div>
         <p class="form-error" id="form-error" hidden>This didn&rsquo;t send. <a id="form-error-mail" href="mailto:hello@refuge.club">Send it by email instead</a> &mdash; your details are already filled in.</p>
       </form>
@@ -673,7 +1027,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
         <span class="monogram" aria-hidden="true">R</span>
         <h3 class="confirm-title" id="confirm-title">Your founding pack is ready.</h3>
         <div class="confirm-actions">
-          <a class="btn btn-solid" href="/founding-pack/" target="_blank" rel="noopener">Read the founding pack</a>
+          <a class="btn btn-solid" href="/founding-pack/" target="_blank" rel="noopener">Read the founding pack <span class="arrow" aria-hidden="true">&rarr;</span></a>
           <a class="confirm-pdf" href="/founding-pack/refuge-founding-pack.pdf" download>Download the PDF</a>
         </div>
         <p>A copy is on its way to your inbox. Dan will be in touch within one working day to arrange a 30-minute introduction call.</p>
@@ -683,39 +1037,202 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 </section>
 
 <footer class="footer">
-  <span class="monogram" aria-hidden="true">R</span>
-  <span class="caps f-name">Refuge</span>
-  <span class="caps f-place">Near Saint-Émilion · Bordeaux</span>
-  <a class="f-mail" href="mailto:hello@refuge.club">hello@refuge.club</a>
-  <span class="caps f-copy">© Refuge Club MMXXVI</span>
+  <div class="wrap">
+    <div class="footer-top">
+      <p class="statement">Somewhere that is already yours <em>when you arrive.</em></p>
+      <div>
+        <span class="caps" style="display:block;color:rgba(247,244,238,0.6)">Near Saint-Émilion · Bordeaux</span>
+        <a href="mailto:hello@refuge.club" style="display:inline-block;margin-top:12px;font-size:21px">hello@refuge.club</a>
+      </div>
+    </div>
+    <div class="wordmark" id="wordmark" aria-label="Refuge"><span style="--i:0">R</span><span style="--i:1">E</span><span style="--i:2">F</span><span style="--i:3">U</span><span style="--i:4">G</span><span style="--i:5">E</span></div>
+    <div class="footer-base caps"><span>&copy; Refuge Club MMXXVI</span><a href="#top">Back to the top &uarr;</a></div>
+  </div>
 </footer>
 
 <script>
 (function () {
+  var root = document.documentElement;
   var nav = document.getElementById('nav');
-  function onScroll() {
-    nav.classList.toggle('scrolled', window.scrollY > 80);
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
   var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+
   if (!motionOK) {
     var heroMedia = document.querySelector('.hero-media');
     if (heroMedia) heroMedia.remove();
   }
+
   if (motionOK && 'IntersectionObserver' in window) {
-    document.documentElement.classList.add('motion');
+    root.classList.add('motion');
+
+    // Split the headline into masked words
+    var title = document.getElementById('hero-title');
+    var i = 0;
+    title.innerHTML = title.innerHTML.split(' ').map(function (w) {
+      return '<span class="w"><span style="--i:' + (i++) + '">' + w + '</span></span>';
+    }).join(' ');
+
+    // Split statements into words that light up as they pass
+    var lits = Array.prototype.slice.call(document.querySelectorAll('.lit'));
+    lits.forEach(function (p) {
+      var walk = function (node) {
+        Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+          if (child.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            child.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+              var s = document.createElement('span');
+              s.className = 'lw';
+              s.textContent = part;
+              frag.appendChild(s);
+            });
+            child.parentNode.replaceChild(frag, child);
+          } else if (child.nodeType === 1) {
+            walk(child);
+          }
+        });
+      };
+      walk(p);
+      p._words = p.querySelectorAll('.lw');
+    });
+
+    // Reveal on entry
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          io.unobserve(entry.target);
-        }
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        e.target.querySelectorAll('.count').forEach(countUp);
+        if (e.target.classList.contains('count')) countUp(e.target);
+        io.unobserve(e.target);
       });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.rv, .mask, .wordmark, .form-card, .fact .fig').forEach(function (el) { io.observe(el); });
+
+    // Estate: swap the image as each fact takes the centre
+    var visuals = document.querySelectorAll('.estate-visual img');
+    var factIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var n = e.target.getAttribute('data-i');
+        visuals.forEach(function (img) { img.classList.toggle('on', img.getAttribute('data-i') === n); });
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    document.querySelectorAll('.fact').forEach(function (f) { factIO.observe(f); });
+
+    // Membership cards: light follows the cursor
+    document.querySelectorAll('.form-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
   }
+
+  function countUp(el) {
+    if (el._done) return;
+    el._done = true;
+    var to = +el.getAttribute('data-to');
+    var start = null;
+    var fmt = function (n) { return Math.round(n).toLocaleString('en-GB'); };
+    var step = function (t) {
+      if (!start) start = t;
+      var k = Math.min(1, (t - start) / 1600);
+      el.textContent = fmt(to * (1 - Math.pow(1 - k, 4)));
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  // Scroll-driven scenes
+  var heroPin = document.getElementById('hero-pin');
+  var win = document.getElementById('window');
+  var day = document.getElementById('day');
+  var track = document.getElementById('day-track');
+  var timeline = document.getElementById('timeline');
+  var stops = timeline.querySelectorAll('.stop');
+  var lastY = 0;
+  var ticking = false;
+
+  // Dawn, midday, evening, night
+  var skies = [[242, 230, 212], [247, 244, 238], [234, 207, 176], [21, 19, 15]];
+  var mix = function (a, b, t) { return a.map(function (v, k) { return Math.round(v + (b[k] - v) * t); }); };
+
+  function layoutDay() {
+    if (!root.classList.contains('motion')) return;
+    day.classList.add('pinned');
+    var distance = Math.max(0, track.scrollWidth - window.innerWidth);
+    day._distance = distance;
+    day.style.height = (distance + window.innerHeight) + 'px';
+  }
+
+  function pinProgress(el) {
+    var r = el.getBoundingClientRect();
+    var span = r.height - window.innerHeight;
+    return span > 0 ? clamp(-r.top / span) : 0;
+  }
+
+  function update() {
+    ticking = false;
+    var y = window.scrollY;
+    var vh = window.innerHeight;
+    var docH = document.documentElement.scrollHeight - vh;
+    nav.style.setProperty('--sp', docH > 0 ? (y / docH).toFixed(4) : 0);
+    nav.classList.toggle('scrolled', y > vh * 0.9);
+    nav.classList.toggle('tucked', y > lastY && y > vh * 1.4 && !document.activeElement.closest('.nav'));
+    lastY = y;
+
+    if (!root.classList.contains('motion')) return;
+
+    heroPin.style.setProperty('--hp', pinProgress(heroPin).toFixed(4));
+    win.style.setProperty('--wp', pinProgress(win).toFixed(4));
+
+    // Day: horizontal travel, sky and colour
+    var dp = pinProgress(day);
+    day.style.setProperty('--dx', (dp * (day._distance || 0)).toFixed(1));
+    day.style.setProperty('--dp', dp.toFixed(4));
+    day.style.setProperty('--px', ((dp - 0.5) * -8).toFixed(2));
+    var seg = Math.min(2.999, dp * 3);
+    var k = Math.floor(seg);
+    var t = seg - k;
+    t = t * t * (3 - 2 * t);
+    var c = mix(skies[k], skies[k + 1], t);
+    day.style.setProperty('--day-bg', 'rgb(' + c.join(',') + ')');
+    var night = clamp((dp - 0.72) / 0.22);
+    var ink = mix([28, 26, 23], [247, 244, 238], night);
+    var soft = mix([92, 86, 77], [200, 192, 178], night);
+    day.style.setProperty('--day-ink', 'rgb(' + ink.join(',') + ')');
+    day.style.setProperty('--day-soft', 'rgb(' + soft.join(',') + ')');
+    var ang = Math.PI * (0.92 - clamp(dp / 0.78) * 0.84);
+    day.style.setProperty('--sx', (50 + Math.cos(ang) * 44).toFixed(2));
+    day.style.setProperty('--sy', (62 - Math.sin(ang) * 48).toFixed(2));
+    day.style.setProperty('--sun', (1 - clamp((dp - 0.66) / 0.14)).toFixed(3));
+    day.style.setProperty('--moon', clamp((dp - 0.8) / 0.15).toFixed(3));
+
+    // Statements light word by word
+    lits.forEach(function (p) {
+      var r = p.getBoundingClientRect();
+      var pr = clamp((vh * 0.82 - r.top) / (r.height + vh * 0.3));
+      var on = Math.round(pr * p._words.length);
+      for (var j = 0; j < p._words.length; j++) p._words[j].classList.toggle('on', j < on);
+    });
+
+    // Calendar line draws through the stops
+    var tr = timeline.getBoundingClientRect();
+    var cp = clamp((vh * 0.75 - tr.top) / (tr.height * 0.6 + vh * 0.25));
+    timeline.style.setProperty('--cp', cp.toFixed(4));
+    stops.forEach(function (s) { s.classList.toggle('on', cp >= +s.getAttribute('data-at')); });
+  }
+
+  function requestUpdate() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', function () { layoutDay(); requestUpdate(); });
+  window.addEventListener('load', function () { layoutDay(); requestUpdate(); });
+  layoutDay();
+  update();
 
   // Set to the deployed Cloudflare Worker URL (see worker/README.md) to send through Resend.
   // While empty, requests go through FormSubmit.
@@ -725,8 +1242,8 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     + 'Thank you for asking about Refuge. Here is the founding pack:\n\n'
     + 'Read online: https://refuge.club/founding-pack/\n'
     + 'PDF: https://refuge.club/founding-pack/refuge-founding-pack.pdf\n\n'
-    + 'It covers the estate, what each family gets, how ownership works, the numbers and the risks. '
-    + 'Most people start with \'What a family gets\' and \'The numbers\'.\n\n'
+    + 'It opens with why we are building Refuge, then covers the estate, what each family gets, how ownership works, the numbers and the risks. '
+    + 'Start with \'Why Refuge\'.\n\n'
     + 'I will be in touch personally within one working day to arrange a 30-minute introduction call. '
     + 'If you would like to pick a time now, just reply with a couple that suit you.\n\n'
     + 'Dan Barnes\nFounder, Refuge\nNear Saint-Émilion, Bordeaux · refuge.club';
