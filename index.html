@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Refuge Club — A Private Estate in Saint-Émilion, Bordeaux</title>
-<meta name="description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening late 2026. Prospectus on request.">
-<meta property="og:title" content="Refuge Club — A Private Estate in Saint-Émilion, Bordeaux">
-<meta property="og:description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening late 2026. Prospectus on request.">
+<title>Refuge Club — A Private Estate near Saint-Émilion, Bordeaux</title>
+<meta name="description" content="A self-sufficient private estate near Saint-Émilion, Bordeaux, owned by 26 founding families. Somewhere to disconnect. Opening 2027. Founding pack on request.">
+<meta property="og:title" content="Refuge Club — A Private Estate near Saint-Émilion, Bordeaux">
+<meta property="og:description" content="A self-sufficient private estate near Saint-Émilion, Bordeaux, owned by 26 founding families. Somewhere to disconnect. Opening 2027. Founding pack on request.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://refuge.club/">
 <meta property="og:image" content="https://refuge.club/assets/estate-aerial.jpg">
@@ -219,6 +219,66 @@ section { padding: 160px 24px; scroll-margin-top: 96px; }
 }
 .btn:hover { background: var(--claret); color: var(--paper); }
 
+.btn-solid { background: var(--claret); color: var(--paper); }
+.btn-solid:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.hero.has-media .btn-solid { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+.hero.has-media .btn-solid:hover { background: var(--claret); border-color: var(--claret); color: var(--paper); }
+.hero-cta { margin-top: 56px; }
+.hero-credit {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  z-index: 2;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--paper-deep);
+  opacity: 0.8;
+}
+.hero .hero-cta .btn { margin-top: 0; }
+.hero-note { margin-top: 18px; font-size: 16px; font-style: italic; color: var(--ink-soft); }
+.hero.has-media .hero-note { color: var(--paper-deep); }
+.section-cta { text-align: center; margin-top: 56px; }
+.nav-cta {
+  margin-left: 18px;
+  padding: 9px 18px;
+  border: 1px solid var(--claret);
+  border-radius: 2px;
+  color: var(--claret);
+}
+.nav-links a.nav-cta:hover { background: var(--claret); color: var(--paper); }
+body.media-hero .nav:not(.scrolled) .nav-links a.nav-cta { border-color: var(--paper); }
+
+/* ——— A day ——— */
+.day { background: var(--paper-deep); }
+.moments {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.moments li { padding: 8px 32px; text-align: center; }
+.moments li + li { border-left: 1px solid var(--gold-line); }
+.moments .caps { color: var(--claret); }
+.moments p { margin-top: 16px; }
+
+/* ——— Questions ——— */
+.faq-list { max-width: 680px; margin: 0 auto; border-top: 1px solid var(--gold-line); }
+.faq details { border-bottom: 1px solid var(--gold-line); padding: 26px 8px; }
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--display);
+  font-size: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--claret); flex: none; }
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { margin-top: 14px; color: var(--ink-soft); }
+
 /* ——— Headings ——— */
 h2 {
   font-family: var(--display);
@@ -249,36 +309,37 @@ h2 {
 .facts dd + dt { margin-top: 44px; }
 
 /* ——— Membership ——— */
-.tiers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  max-width: 1060px;
+.ledger {
+  list-style: none;
+  max-width: 760px;
   margin: 72px auto 0;
+  border-top: 1px solid var(--gold-line);
 }
-.tier {
-  background: var(--paper-deep);
-  border: 1px solid var(--gold-line);
-  padding: 64px 40px;
-  text-align: center;
+.ledger .entry {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  grid-template-areas: "num name price" "num places price";
+  align-items: baseline;
+  column-gap: 24px;
+  padding: 32px 8px;
+  border-bottom: 1px solid var(--gold-line);
 }
-.tier.partner { border-color: var(--claret); }
-.tier h3::after {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: var(--gold-line);
-  margin: 22px auto 0;
+.ledger .numeral {
+  grid-area: num;
+  font-family: var(--display);
+  font-size: 26px;
+  color: var(--claret);
 }
-.tier .price {
-  font-family: var(--body);
+.ledger .name { grid-area: name; color: var(--ink); }
+.ledger .places { grid-area: places; margin-top: 6px; color: var(--ink-soft); font-style: italic; }
+.ledger .places:empty { display: none; }
+.ledger .price {
+  grid-area: price;
   font-weight: 500;
-  font-size: 42px;
+  font-size: 30px;
   line-height: 1.1;
-  margin-top: 30px;
+  font-variant-numeric: oldstyle-nums;
 }
-.tier .places { margin-top: 14px; color: var(--ink-soft); }
 .tiers-after { margin-top: 64px; text-align: center; color: var(--ink-soft); max-width: 62ch; margin-left: auto; margin-right: auto; }
 
 /* ——— Calendar ——— */
@@ -304,6 +365,7 @@ h2 {
 .field { margin-bottom: 40px; }
 .field label { display: block; color: var(--ink-soft); margin-bottom: 12px; }
 .field input,
+.field select,
 .field textarea {
   width: 100%;
   background: var(--paper-deep);
@@ -318,7 +380,17 @@ h2 {
   resize: vertical;
 }
 .field input:focus,
+.field select:focus,
 .field textarea:focus { outline: none; border-bottom-color: var(--claret); }
+.field select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink-soft) 50%), linear-gradient(135deg, var(--ink-soft) 50%, transparent 50%);
+  background-position: calc(100% - 22px) 50%, calc(100% - 16px) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
 .field.invalid input,
 .field.invalid textarea { border-bottom-color: var(--claret); }
 .field .error {
@@ -377,7 +449,6 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 /* ——— Responsive ——— */
 @media (max-width: 900px) {
   .estate-grid { grid-template-columns: 1fr; gap: 56px; max-width: 560px; }
-  .tiers { grid-template-columns: 1fr; max-width: 480px; }
 }
 @media (max-width: 760px) {
   body { font-size: 18px; }
@@ -391,9 +462,16 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   .nav { padding: 18px 20px; }
   .appellation::before, .appellation::after { width: 40px; }
   .divider { margin-top: 64px; }
+  .moments { grid-template-columns: 1fr; max-width: 480px; }
+  .moments li { padding: 32px 8px; }
+  .moments li + li { border-left: none; border-top: 1px solid var(--gold-line); }
+  .faq summary { font-size: 20px; }
+  .ledger .entry { grid-template-columns: 40px 1fr; grid-template-areas: "num name" "num places" "num price"; }
+  .ledger .price { margin-top: 12px; font-size: 26px; }
 }
 @media (max-width: 600px) {
   .nav-links .mid { display: none; }
+  .nav-cta { margin-left: 0; }
 }
 </style>
 </head>
@@ -402,7 +480,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 <nav class="nav" id="nav" aria-label="Main">
   <a class="nav-wordmark" href="#top">REFUGE</a>
   <div class="nav-links caps">
-    <a class="mid" href="#estate">The estate</a><span class="sep mid" aria-hidden="true">·</span><a class="mid" href="#membership">Membership</a><span class="sep mid" aria-hidden="true">·</span><a href="#request">Request</a>
+    <a class="mid" href="#estate">The estate</a><span class="sep mid" aria-hidden="true">·</span><a class="mid" href="#membership">Membership</a><span class="sep mid" aria-hidden="true">·</span><a class="mid" href="#questions">Questions</a><a class="nav-cta" href="#request">Founding pack</a>
   </div>
 </nav>
 
@@ -411,22 +489,38 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     <source src="assets/estate-aerial.mp4" type="video/mp4">
   </video>
   <div class="hero-scrim" aria-hidden="true"></div>
+  <span class="hero-credit">An impression of the estate</span>
   <span class="monogram hero-seq" aria-hidden="true">R</span>
-  <div class="appellation hero-seq"><span class="caps">Saint-Émilion · Bordeaux · MMXXVI</span></div>
+  <div class="appellation hero-seq"><span class="caps">Near Saint-Émilion · Bordeaux · Opening 2027</span></div>
   <h1 class="hero-seq">The next 20 years don&rsquo;t have to look like the last&nbsp;10.</h1>
-  <p class="hero-line hero-seq">Refuge is a private estate in Saint-Émilion, shared by a small number of founding families.</p>
-  <a class="btn hero-seq" href="#request">Request the prospectus</a>
+  <p class="hero-line hero-seq">A self-sufficient private estate on Bordeaux&rsquo;s Right Bank, owned by 26 founding families. Somewhere to disconnect, among people who want the same things you&nbsp;do.</p>
+  <div class="hero-seq hero-cta">
+    <a class="btn btn-solid" href="#request">Request the founding pack</a>
+    <p class="hero-note">We reply personally, within two days.</p>
+  </div>
 </header>
 
 <section id="idea">
   <div class="inner reveal">
     <div class="appellation section-head"><span class="caps">The idea</span></div>
     <div class="prose">
-      <p>You built the company. You raised the round, ran the team, made the flight. The last ten years were spent at full speed, and the calendar shows it.</p>
-      <p>Refuge is the counterweight. A working estate in Saint-Émilion where a small group of families keep a permanent foothold — a place that is already yours when you arrive, where the days are long, the phones are quiet, and the people around the table chose the same thing you did.</p>
-      <p>Not a hotel. Not a resort. An estate, held in common by people who decided the next twenty years should look different.</p>
+      <p>You built the company. You raised the round, ran the team, made the flight. The last ten years were spent at full speed, and your family felt it.</p>
+      <p>Refuge is the counterweight. An estate that is staffed, stocked and ready when you arrive, where the phones go in a drawer, the children run outside and dinner is a long table of people you&rsquo;re glad to see.</p>
+      <p>Not a hotel. Not a resort. Not a commune. Your lodge is private, you come and go as you please, and nobody tells you how to spend your days.</p>
     </div>
     <div class="divider" role="presentation"></div>
+  </div>
+</section>
+
+<section class="day" id="day">
+  <div class="inner reveal">
+    <div class="appellation section-head"><span class="caps">A day at Refuge</span></div>
+    <ol class="moments">
+      <li><span class="caps">Morning</span><p>Coffee on the terrace. Eggs from the estate&rsquo;s hens, bread from the oven. Nobody has a call at nine.</p></li>
+      <li><span class="caps">Midday</span><p>The children are in the orchard or the pool. You&rsquo;re on a bike between vineyards, or asleep in the shade.</p></li>
+      <li><span class="caps">Evening</span><p>One long table, food from the garden, wine from down the road. Conversation that isn&rsquo;t about work.</p></li>
+      <li><span class="caps">Night</span><p>No traffic, no glow on the horizon. The estate runs on its own power and water while you sleep.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -437,11 +531,13 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
       <div class="estate-frame"><span class="monogram gold" aria-hidden="true">R</span></div>
       <dl class="facts">
         <dt class="caps">Setting</dt>
-        <dd>Among the vineyards of Saint-Émilion and Pomerol, on Bordeaux&rsquo;s Right Bank.</dd>
-        <dt class="caps">Form</dt>
-        <dd>A private estate held for the use of its members and their families.</dd>
-        <dt class="caps">Rhythm</dt>
-        <dd>Open year-round. The estate runs to the seasons of the region.</dd>
+        <dd>A domaine of 6&ndash;10 hectares on Bordeaux&rsquo;s Right Bank, within half an hour of Saint-Émilion.</dd>
+        <dt class="caps">Self-sufficient</dt>
+        <dd>Solar and storage, its own borehole, a kitchen garden and orchard. The estate makes its own power, water and much of its food.</dd>
+        <dt class="caps">Lodges</dt>
+        <dd>A main house with fourteen lodges: six private, eight shared. Restored outbuildings and low-impact new builds.</dd>
+        <dt class="caps">Owned</dt>
+        <dd>Founding families own the estate itself, through shares that carry the right to use it. Owners, not guests.</dd>
       </dl>
     </div>
   </div>
@@ -449,48 +545,83 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 
 <section id="membership">
   <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">Founding memberships · 2026</span></div>
-    <p class="prose">Refuge opens in late 2026 with a founding group, structured in three forms.</p>
-    <div class="tiers">
-      <article class="tier partner">
-        <h3 class="caps">Estate Partner</h3>
-        <p class="price">€150,000</p>
-        <p class="places">Six partnerships.</p>
-      </article>
-      <article class="tier">
-        <h3 class="caps">Founding Partner</h3>
-        <p class="price">€75,000</p>
-      </article>
-      <article class="tier">
-        <h3 class="caps">Member</h3>
-        <p class="price">€25,000</p>
-      </article>
-    </div>
-    <p class="tiers-after">Each form carries a founding fee and an annual retainer. Full terms, fees, and the founding agreement are set out in the prospectus, available on request.</p>
+    <div class="appellation section-head"><span class="caps">Founding memberships</span></div>
+    <p class="prose">Twenty-six founding families, in three forms. Each carries a one-off founding contribution and an annual fee for staff and upkeep.</p>
+    <ol class="ledger">
+      <li class="entry">
+        <span class="numeral" aria-hidden="true">I</span>
+        <span class="name caps">Estate Partner</span>
+        <span class="places">Six places · your own lodge, designed with you · €18,000 a year</span>
+        <span class="price">€175,000</span>
+      </li>
+      <li class="entry">
+        <span class="numeral" aria-hidden="true">II</span>
+        <span class="name caps">Founding Partner</span>
+        <span class="places">Ten places · 28 nights a year in the shared lodges · €13,000 a year</span>
+        <span class="price">€90,000</span>
+      </li>
+      <li class="entry">
+        <span class="numeral" aria-hidden="true">III</span>
+        <span class="name caps">Member</span>
+        <span class="places">Ten places · 14 nights a year in the shared lodges · €10,000 a year</span>
+        <span class="price">€35,000</span>
+      </li>
+    </ol>
+    <p class="tiers-after">No money moves until a property is under offer and the founding group is formed. The founding pack sets out the numbers, the structure and the risks in full.</p>
+    <div class="section-cta"><a class="btn" href="#request">Request the founding pack</a></div>
   </div>
 </section>
 
 <section class="stewardship" id="stewardship">
   <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">Stewardship</span></div>
+    <div class="appellation section-head"><span class="caps">Who runs it</span></div>
     <div class="prose">
-      <p>Refuge is founded by Dan Barnes. The estate is held and operated under a structure built for one purpose: that it works as well in year twenty as in year one.</p>
+      <p>Refuge is run by Caroline, full-time. An interior designer and a trustee on several charity boards, she is also the best host we know. An experienced estate manager and a small team work alongside her.</p>
+      <p>Dan Barnes is the founder. The estate is owned by its families, overseen by a council they elect, and its accounts are open to every one of them.</p>
     </div>
   </div>
 </section>
 
 <section id="calendar">
   <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">2026</span></div>
+    <div class="appellation section-head"><span class="caps">The calendar</span></div>
     <div class="timeline">
       <div class="moment">
         <span class="caps">Now</span>
-        <p>Founding conversations underway. Prospectus available on request.</p>
+        <p>Founding conversations. A call, then a day with us in Bordeaux.</p>
       </div>
       <div class="moment">
-        <span class="caps">Late 2026</span>
-        <p>The estate opens to members.</p>
+        <span class="caps">Early 2027</span>
+        <p>The estate is chosen and secured with the founding families.</p>
       </div>
+      <div class="moment">
+        <span class="caps">Late 2027</span>
+        <p>The estate opens to its founding families.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="questions">
+  <div class="inner reveal">
+    <div class="appellation section-head"><span class="caps">Questions</span></div>
+    <div class="faq-list">
+      <details>
+        <summary>Is this a timeshare?</summary>
+        <p>No. Founding families hold shares in the company that owns the estate, and the right to use it comes with those shares. You can sell them to an incoming family when you choose.</p>
+      </details>
+      <details>
+        <summary>Do we have to live there, or join in?</summary>
+        <p>No. Most families come for long weekends and a few weeks in summer. There is no programme and no rules about how you spend your time, beyond being good company.</p>
+      </details>
+      <details>
+        <summary>What happens to our money before the estate is bought?</summary>
+        <p>Nothing moves until a property is under offer and the founding group is formed. The first payment then sits in escrow, and comes back in full if the group doesn&rsquo;t close.</p>
+      </details>
+      <details>
+        <summary>Who decides who joins?</summary>
+        <p>Every new family meets Caroline and Dan and spends a day on the estate. The families&rsquo; council approves each one.</p>
+      </details>
     </div>
   </div>
 </section>
@@ -498,8 +629,8 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 <section class="request" id="request">
   <div class="inner reveal">
     <div class="appellation section-head"><span class="caps">By invitation</span></div>
-    <h2>Request the prospectus.</h2>
-    <p class="request-line">Tell us briefly who you are. We reply personally.</p>
+    <h2>Request the founding pack.</h2>
+    <p class="request-line">Tell us briefly who you are. Caroline or Dan will send the pack and write back personally within two days.</p>
     <div class="form-wrap">
       <form id="request-form" novalidate>
         <div class="field" id="field-name-wrap">
@@ -513,17 +644,26 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
           <p class="error">A valid email address is needed.</p>
         </div>
         <div class="field">
+          <label class="caps" for="field-form">Which form interests you</label>
+          <select id="field-form" name="form">
+            <option value="Not sure yet">Not sure yet</option>
+            <option value="Estate Partner">Estate Partner</option>
+            <option value="Founding Partner">Founding Partner</option>
+            <option value="Member">Member</option>
+          </select>
+        </div>
+        <div class="field">
           <label class="caps" for="field-about">A line or two about you and your family</label>
           <textarea id="field-about" name="about" rows="3"></textarea>
         </div>
         <div class="form-actions">
-          <button class="btn" type="submit" id="submit-btn">Request the prospectus</button>
+          <button class="btn btn-solid" type="submit" id="submit-btn">Request the founding pack</button>
         </div>
-        <p class="form-error" id="form-error" hidden>This didn&rsquo;t send. Write to us directly at <a href="mailto:hello@refuge.club">hello@refuge.club</a>.</p>
+        <p class="form-error" id="form-error" hidden>This didn&rsquo;t send. <a id="form-error-mail" href="mailto:hello@refuge.club">Send it by email instead</a> &mdash; your details are already filled in.</p>
       </form>
       <div class="confirmation" id="confirmation" role="status" hidden>
         <span class="monogram" aria-hidden="true">R</span>
-        <p>Thank you. We&rsquo;ll be in touch personally.</p>
+        <p>Thank you. A short note is on its way to your inbox now, and Caroline or Dan will write back personally within two days.</p>
       </div>
     </div>
   </div>
@@ -532,7 +672,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 <footer class="footer">
   <span class="monogram" aria-hidden="true">R</span>
   <span class="caps f-name">Refuge</span>
-  <span class="caps f-place">Saint-Émilion · Bordeaux</span>
+  <span class="caps f-place">Near Saint-Émilion · Bordeaux</span>
   <a class="f-mail" href="mailto:hello@refuge.club">hello@refuge.club</a>
   <span class="caps f-copy">© Refuge Club MMXXVI</span>
 </footer>
@@ -564,12 +704,20 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   }
 
+  var AUTORESPONSE = 'Dear {name},\n\n'
+    + 'Thank you for asking about Refuge. This is a quick note to say your request has reached us.\n\n'
+    + 'Caroline or I will send the founding pack and write to you personally within two days. '
+    + 'The pack covers the estate, the three forms, how ownership works, the numbers and the risks.\n\n'
+    + 'If you would rather talk first, reply to this email with a couple of times that suit you and we will set up a short call.\n\n'
+    + 'Dan\n\nRefuge · near Saint-Émilion, Bordeaux\nhello@refuge.club';
+
   var form = document.getElementById('request-form');
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     var name = document.getElementById('field-name');
     var email = document.getElementById('field-email');
     var about = document.getElementById('field-about');
+    var interest = document.getElementById('field-form');
 
     var nameOK = name.value.trim() !== '';
     var emailOK = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
@@ -582,14 +730,25 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     button.disabled = true;
     formError.hidden = true;
 
+    var mailBody = 'Name: ' + name.value.trim() + '\nEmail: ' + email.value.trim() + '\nInterested in: ' + interest.value + '\n\n' + about.value.trim();
+    document.getElementById('form-error-mail').href = 'mailto:hello@refuge.club'
+      + '?subject=' + encodeURIComponent('Founding pack request — ' + name.value.trim())
+      + '&body=' + encodeURIComponent(mailBody);
+
+    var controller = 'AbortController' in window ? new AbortController() : null;
+    var timeout = controller && setTimeout(function () { controller.abort(); }, 12000);
+
     fetch('https://formsubmit.co/ajax/hello@refuge.club', {
       method: 'POST',
+      signal: controller ? controller.signal : undefined,
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         name: name.value.trim(),
         email: email.value.trim(),
+        interest: interest.value,
         message: about.value.trim(),
-        _subject: 'Prospectus request — ' + name.value.trim(),
+        _subject: 'Founding pack request — ' + name.value.trim() + ' (' + interest.value + ')',
+        _autoresponse: AUTORESPONSE.replace('{name}', name.value.trim().split(' ')[0]),
         _template: 'table'
       })
     }).then(function (response) {
@@ -597,9 +756,11 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
       return response.json();
     }).then(function (result) {
       if (String(result.success) !== 'true') throw new Error('send failed');
+      clearTimeout(timeout);
       form.hidden = true;
       document.getElementById('confirmation').hidden = false;
     }).catch(function () {
+      clearTimeout(timeout);
       button.disabled = false;
       formError.hidden = false;
     });
