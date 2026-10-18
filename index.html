@@ -519,7 +519,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
         <div class="form-actions">
           <button class="btn" type="submit" id="submit-btn">Request the prospectus</button>
         </div>
-        <p class="form-error" id="form-error" hidden>This didn&rsquo;t send. Write to us directly at <a href="mailto:hello@refuge.club">hello@refuge.club</a>.</p>
+        <p class="form-error" id="form-error" hidden>This didn&rsquo;t send. <a id="form-error-mail" href="mailto:hello@refuge.club">Send it by email instead</a> &mdash; your details are already filled in.</p>
       </form>
       <div class="confirmation" id="confirmation" role="status" hidden>
         <span class="monogram" aria-hidden="true">R</span>
@@ -582,8 +582,17 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     button.disabled = true;
     formError.hidden = true;
 
+    var mailBody = 'Name: ' + name.value.trim() + '\nEmail: ' + email.value.trim() + '\n\n' + about.value.trim();
+    document.getElementById('form-error-mail').href = 'mailto:hello@refuge.club'
+      + '?subject=' + encodeURIComponent('Prospectus request — ' + name.value.trim())
+      + '&body=' + encodeURIComponent(mailBody);
+
+    var controller = 'AbortController' in window ? new AbortController() : null;
+    var timeout = controller && setTimeout(function () { controller.abort(); }, 12000);
+
     fetch('https://formsubmit.co/ajax/hello@refuge.club', {
       method: 'POST',
+      signal: controller ? controller.signal : undefined,
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         name: name.value.trim(),
@@ -597,9 +606,11 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
       return response.json();
     }).then(function (result) {
       if (String(result.success) !== 'true') throw new Error('send failed');
+      clearTimeout(timeout);
       form.hidden = true;
       document.getElementById('confirmation').hidden = false;
     }).catch(function () {
+      clearTimeout(timeout);
       button.disabled = false;
       formError.hidden = false;
     });
