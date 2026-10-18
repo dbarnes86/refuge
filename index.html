@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Refuge Club — A Private Estate in Saint-Émilion, Bordeaux</title>
-<meta name="description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening late 2026. Prospectus on request.">
-<meta property="og:title" content="Refuge Club — A Private Estate in Saint-Émilion, Bordeaux">
-<meta property="og:description" content="Refuge is a private estate in Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening late 2026. Prospectus on request.">
+<title>Refuge Club — A Private Estate near Saint-Émilion, Bordeaux</title>
+<meta name="description" content="Refuge is a private estate near Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening 2027. Founding pack on request.">
+<meta property="og:title" content="Refuge Club — A Private Estate near Saint-Émilion, Bordeaux">
+<meta property="og:description" content="Refuge is a private estate near Saint-Émilion, Bordeaux, shared by a small number of founding families. Opening 2027. Founding pack on request.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://refuge.club/">
 <meta property="og:image" content="https://refuge.club/assets/estate-aerial.jpg">
@@ -249,36 +249,37 @@ h2 {
 .facts dd + dt { margin-top: 44px; }
 
 /* ——— Membership ——— */
-.tiers {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  max-width: 1060px;
+.ledger {
+  list-style: none;
+  max-width: 760px;
   margin: 72px auto 0;
+  border-top: 1px solid var(--gold-line);
 }
-.tier {
-  background: var(--paper-deep);
-  border: 1px solid var(--gold-line);
-  padding: 64px 40px;
-  text-align: center;
+.ledger .entry {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  grid-template-areas: "num name price" "num places price";
+  align-items: baseline;
+  column-gap: 24px;
+  padding: 32px 8px;
+  border-bottom: 1px solid var(--gold-line);
 }
-.tier.partner { border-color: var(--claret); }
-.tier h3::after {
-  content: "";
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: var(--gold-line);
-  margin: 22px auto 0;
+.ledger .numeral {
+  grid-area: num;
+  font-family: var(--display);
+  font-size: 26px;
+  color: var(--claret);
 }
-.tier .price {
-  font-family: var(--body);
+.ledger .name { grid-area: name; color: var(--ink); }
+.ledger .places { grid-area: places; margin-top: 6px; color: var(--ink-soft); font-style: italic; }
+.ledger .places:empty { display: none; }
+.ledger .price {
+  grid-area: price;
   font-weight: 500;
-  font-size: 42px;
+  font-size: 30px;
   line-height: 1.1;
-  margin-top: 30px;
+  font-variant-numeric: oldstyle-nums;
 }
-.tier .places { margin-top: 14px; color: var(--ink-soft); }
 .tiers-after { margin-top: 64px; text-align: center; color: var(--ink-soft); max-width: 62ch; margin-left: auto; margin-right: auto; }
 
 /* ——— Calendar ——— */
@@ -377,7 +378,6 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 /* ——— Responsive ——— */
 @media (max-width: 900px) {
   .estate-grid { grid-template-columns: 1fr; gap: 56px; max-width: 560px; }
-  .tiers { grid-template-columns: 1fr; max-width: 480px; }
 }
 @media (max-width: 760px) {
   body { font-size: 18px; }
@@ -391,6 +391,8 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   .nav { padding: 18px 20px; }
   .appellation::before, .appellation::after { width: 40px; }
   .divider { margin-top: 64px; }
+  .ledger .entry { grid-template-columns: 40px 1fr; grid-template-areas: "num name" "num places" "num price"; }
+  .ledger .price { margin-top: 12px; font-size: 26px; }
 }
 @media (max-width: 600px) {
   .nav-links .mid { display: none; }
@@ -414,8 +416,8 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   <span class="monogram hero-seq" aria-hidden="true">R</span>
   <div class="appellation hero-seq"><span class="caps">Saint-Émilion · Bordeaux · MMXXVI</span></div>
   <h1 class="hero-seq">The next 20 years don&rsquo;t have to look like the last&nbsp;10.</h1>
-  <p class="hero-line hero-seq">Refuge is a private estate in Saint-Émilion, shared by a small number of founding families.</p>
-  <a class="btn hero-seq" href="#request">Request the prospectus</a>
+  <p class="hero-line hero-seq">Refuge is a private estate near Saint-Émilion, shared by a small number of founding families.</p>
+  <a class="btn hero-seq" href="#request">Request the founding pack</a>
 </header>
 
 <section id="idea">
@@ -423,7 +425,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     <div class="appellation section-head"><span class="caps">The idea</span></div>
     <div class="prose">
       <p>You built the company. You raised the round, ran the team, made the flight. The last ten years were spent at full speed, and the calendar shows it.</p>
-      <p>Refuge is the counterweight. A working estate in Saint-Émilion where a small group of families keep a permanent foothold — a place that is already yours when you arrive, where the days are long, the phones are quiet, and the people around the table chose the same thing you did.</p>
+      <p>Refuge is the counterweight. A working estate on Bordeaux&rsquo;s Right Bank where a small group of families keep a permanent foothold — a place that is already yours when you arrive, where the days are long, the phones are quiet, and the people around the table chose the same thing you did.</p>
       <p>Not a hotel. Not a resort. An estate, held in common by people who decided the next twenty years should look different.</p>
     </div>
     <div class="divider" role="presentation"></div>
@@ -437,7 +439,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
       <div class="estate-frame"><span class="monogram gold" aria-hidden="true">R</span></div>
       <dl class="facts">
         <dt class="caps">Setting</dt>
-        <dd>Among the vineyards of Saint-Émilion and Pomerol, on Bordeaux&rsquo;s Right Bank.</dd>
+        <dd>Among the vineyards near Saint-Émilion, on Bordeaux&rsquo;s Right Bank.</dd>
         <dt class="caps">Form</dt>
         <dd>A private estate held for the use of its members and their families.</dd>
         <dt class="caps">Rhythm</dt>
@@ -449,24 +451,29 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 
 <section id="membership">
   <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">Founding memberships · 2026</span></div>
-    <p class="prose">Refuge opens in late 2026 with a founding group, structured in three forms.</p>
-    <div class="tiers">
-      <article class="tier partner">
-        <h3 class="caps">Estate Partner</h3>
-        <p class="price">€150,000</p>
-        <p class="places">Six partnerships.</p>
-      </article>
-      <article class="tier">
-        <h3 class="caps">Founding Partner</h3>
-        <p class="price">€75,000</p>
-      </article>
-      <article class="tier">
-        <h3 class="caps">Member</h3>
-        <p class="price">€25,000</p>
-      </article>
-    </div>
-    <p class="tiers-after">Each form carries a founding fee and an annual retainer. Full terms, fees, and the founding agreement are set out in the prospectus, available on request.</p>
+    <div class="appellation section-head"><span class="caps">Founding memberships</span></div>
+    <p class="prose">Refuge opens in 2027 with a founding group, held in three forms.</p>
+    <ol class="ledger">
+      <li class="entry">
+        <span class="numeral" aria-hidden="true">I</span>
+        <span class="name caps">Estate Partner</span>
+        <span class="places">Six partnerships</span>
+        <span class="price">€150,000</span>
+      </li>
+      <li class="entry">
+        <span class="numeral" aria-hidden="true">II</span>
+        <span class="name caps">Founding Partner</span>
+        <span class="places"></span>
+        <span class="price">€75,000</span>
+      </li>
+      <li class="entry">
+        <span class="numeral" aria-hidden="true">III</span>
+        <span class="name caps">Member</span>
+        <span class="places"></span>
+        <span class="price">€25,000</span>
+      </li>
+    </ol>
+    <p class="tiers-after">Each form carries a founding fee and an annual retainer. Full terms, fees, and the founding agreement are set out in the founding pack, available on request.</p>
   </div>
 </section>
 
@@ -481,15 +488,15 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 
 <section id="calendar">
   <div class="inner reveal">
-    <div class="appellation section-head"><span class="caps">2026</span></div>
+    <div class="appellation section-head"><span class="caps">The calendar</span></div>
     <div class="timeline">
       <div class="moment">
         <span class="caps">Now</span>
-        <p>Founding conversations underway. Prospectus available on request.</p>
+        <p>Founding conversations underway. The founding pack is available on request.</p>
       </div>
       <div class="moment">
-        <span class="caps">Late 2026</span>
-        <p>The estate opens to members.</p>
+        <span class="caps">2027</span>
+        <p>The estate opens to its founding families.</p>
       </div>
     </div>
   </div>
@@ -498,7 +505,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 <section class="request" id="request">
   <div class="inner reveal">
     <div class="appellation section-head"><span class="caps">By invitation</span></div>
-    <h2>Request the prospectus.</h2>
+    <h2>Request the founding pack.</h2>
     <p class="request-line">Tell us briefly who you are. We reply personally.</p>
     <div class="form-wrap">
       <form id="request-form" novalidate>
@@ -517,7 +524,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
           <textarea id="field-about" name="about" rows="3"></textarea>
         </div>
         <div class="form-actions">
-          <button class="btn" type="submit" id="submit-btn">Request the prospectus</button>
+          <button class="btn" type="submit" id="submit-btn">Request the founding pack</button>
         </div>
         <p class="form-error" id="form-error" hidden>This didn&rsquo;t send. <a id="form-error-mail" href="mailto:hello@refuge.club">Send it by email instead</a> &mdash; your details are already filled in.</p>
       </form>
@@ -584,7 +591,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
 
     var mailBody = 'Name: ' + name.value.trim() + '\nEmail: ' + email.value.trim() + '\n\n' + about.value.trim();
     document.getElementById('form-error-mail').href = 'mailto:hello@refuge.club'
-      + '?subject=' + encodeURIComponent('Prospectus request — ' + name.value.trim())
+      + '?subject=' + encodeURIComponent('Founding pack request — ' + name.value.trim())
       + '&body=' + encodeURIComponent(mailBody);
 
     var controller = 'AbortController' in window ? new AbortController() : null;
@@ -598,7 +605,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
         name: name.value.trim(),
         email: email.value.trim(),
         message: about.value.trim(),
-        _subject: 'Prospectus request — ' + name.value.trim(),
+        _subject: 'Founding pack request — ' + name.value.trim(),
         _template: 'table'
       })
     }).then(function (response) {
