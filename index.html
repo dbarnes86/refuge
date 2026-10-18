@@ -408,7 +408,10 @@ h2 {
 }
 .form-actions { text-align: center; margin-top: 56px; }
 .confirmation { text-align: center; padding: 48px 0; }
-.confirmation p { margin-top: 32px; }
+.confirmation p { margin-top: 32px; color: var(--ink-soft); }
+.confirm-title { font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1.2; margin-top: 32px; }
+.confirm-actions { margin-top: 36px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.confirm-pdf { font-size: 17px; border-bottom: 1px solid var(--claret); }
 
 /* ——— Footer ——— */
 .footer {
@@ -496,7 +499,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   <p class="hero-line hero-seq">A self-sufficient private estate on Bordeaux&rsquo;s Right Bank, owned by 26 founding families. Somewhere to disconnect, among people who want the same things you&nbsp;do.</p>
   <div class="hero-seq hero-cta">
     <a class="btn btn-solid" href="#request">Request the founding pack</a>
-    <p class="hero-note">We reply personally, within two days.</p>
+    <p class="hero-note">The founding pack arrives in your inbox straight away.</p>
   </div>
 </header>
 
@@ -630,7 +633,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   <div class="inner reveal">
     <div class="appellation section-head"><span class="caps">By invitation</span></div>
     <h2>Request the founding pack.</h2>
-    <p class="request-line">Tell us briefly who you are. Caroline or Dan will send the pack and write back personally within two days.</p>
+    <p class="request-line">Tell us briefly who you are. The founding pack arrives in your inbox straight away, and Dan Barnes, the founder, will be in touch personally to arrange a short introduction call.</p>
     <div class="form-wrap">
       <form id="request-form" novalidate>
         <div class="field" id="field-name-wrap">
@@ -663,7 +666,12 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
       </form>
       <div class="confirmation" id="confirmation" role="status" hidden>
         <span class="monogram" aria-hidden="true">R</span>
-        <p>Thank you. A short note is on its way to your inbox now, and Caroline or Dan will write back personally within two days.</p>
+        <h3 class="confirm-title" id="confirm-title">Your founding pack is ready.</h3>
+        <div class="confirm-actions">
+          <a class="btn btn-solid" href="/founding-pack/" target="_blank" rel="noopener">Read the founding pack</a>
+          <a class="confirm-pdf" href="/founding-pack/refuge-founding-pack.pdf" download>Download the PDF</a>
+        </div>
+        <p>A copy is on its way to your inbox. Dan will be in touch within one working day to arrange a 30-minute introduction call.</p>
       </div>
     </div>
   </div>
@@ -705,11 +713,14 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
   }
 
   var AUTORESPONSE = 'Dear {name},\n\n'
-    + 'Thank you for asking about Refuge. This is a quick note to say your request has reached us.\n\n'
-    + 'Caroline or I will send the founding pack and write to you personally within two days. '
-    + 'The pack covers the estate, the three forms, how ownership works, the numbers and the risks.\n\n'
-    + 'If you would rather talk first, reply to this email with a couple of times that suit you and we will set up a short call.\n\n'
-    + 'Dan\n\nRefuge · near Saint-Émilion, Bordeaux\nhello@refuge.club';
+    + 'Thank you for asking about Refuge. Here is the founding pack:\n\n'
+    + 'Read online: https://refuge.club/founding-pack/\n'
+    + 'PDF: https://refuge.club/founding-pack/refuge-founding-pack.pdf\n\n'
+    + 'It covers the estate, what each family gets, how ownership works, the numbers and the risks. '
+    + 'Most people start with \'What a family gets\' and \'The numbers\'.\n\n'
+    + 'I will be in touch personally within one working day to arrange a 30-minute introduction call. '
+    + 'If you would like to pick a time now, just reply with a couple that suit you.\n\n'
+    + 'Dan Barnes\nFounder, Refuge\nNear Saint-Émilion, Bordeaux · refuge.club';
 
   var form = document.getElementById('request-form');
   form.addEventListener('submit', function (event) {
@@ -757,6 +768,7 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     }).then(function (result) {
       if (String(result.success) !== 'true') throw new Error('send failed');
       clearTimeout(timeout);
+      document.getElementById('confirm-title').textContent = 'Thank you, ' + name.value.trim().split(' ')[0] + '. Your founding pack is ready.';
       form.hidden = true;
       document.getElementById('confirmation').hidden = false;
     }).catch(function () {

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refuge — Founding Pack</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="The Refuge founding pack: the estate, the three forms, how ownership works, the numbers and the risks.">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#F7F4EE">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+:root {
+  --paper: #F7F4EE;
+  --paper-deep: #EFEAE0;
+  --ink: #1C1A17;
+  --ink-soft: #5C564D;
+  --claret: #5E1A24;
+  --gold-line: #A98E5B;
+  --display: 'Libre Caslon Display', Georgia, 'Times New Roman', serif;
+  --body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 19px; line-height: 1.65; }
+a { color: var(--claret); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { border-bottom-color: var(--claret); }
+::selection { background: var(--claret); color: var(--paper); }
+.caps { font-weight: 500; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; }
+
+.bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 22px 40px; border-bottom: 1px solid var(--gold-line);
+}
+.bar .word { font-family: var(--display); font-size: 20px; color: var(--ink); letter-spacing: 0.04em; border: none; }
+.bar .pdf { border: 1px solid var(--claret); border-radius: 2px; padding: 9px 18px; }
+.bar .pdf:hover { background: var(--claret); color: var(--paper); }
+
+.cover { text-align: center; padding: 120px 24px 96px; background: var(--paper-deep); }
+.monogram {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border: 1px solid var(--claret); border-radius: 50%;
+  font-family: var(--display); font-size: 28px; color: var(--claret);
+}
+.appellation { display: flex; align-items: center; justify-content: center; gap: 24px; color: var(--ink-soft); margin-top: 36px; }
+.appellation::before, .appellation::after { content: ""; width: 56px; height: 1px; background: var(--gold-line); }
+.cover h1 { font-family: var(--display); font-weight: 400; font-size: 60px; line-height: 1.1; margin-top: 32px; }
+.cover .lead { max-width: 54ch; margin: 28px auto 0; color: var(--ink-soft); font-size: 20px; }
+.cover .from { margin-top: 36px; font-style: italic; color: var(--ink-soft); }
+
+main { max-width: 760px; margin: 0 auto; padding: 0 24px 120px; }
+.toc { list-style: none; margin: 72px 0 0; border-top: 1px solid var(--gold-line); counter-reset: toc; }
+.toc li { border-bottom: 1px solid var(--gold-line); counter-increment: toc; }
+.toc a { display: flex; gap: 24px; padding: 14px 8px; color: var(--ink); border: none; }
+.toc a::before { content: counter(toc, upper-roman); color: var(--claret); font-family: var(--display); min-width: 40px; }
+.toc a:hover { color: var(--claret); }
+
+section { padding-top: 96px; scroll-margin-top: 24px; }
+.num { font-family: var(--display); color: var(--claret); font-size: 22px; }
+h2 { font-family: var(--display); font-weight: 400; font-size: 38px; line-height: 1.15; margin-top: 8px; }
+h3 { font-weight: 500; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); margin-top: 48px; }
+section p { margin-top: 1.1em; }
+section p.first { font-size: 21px; margin-top: 28px; }
+ul { margin: 1.1em 0 0 1.1em; }
+li + li { margin-top: 0.5em; }
+strong { font-weight: 600; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: 17px; }
+th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--gold-line); vertical-align: top; }
+thead th { font-weight: 500; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); border-bottom: 1px solid var(--ink-soft); }
+td.n, th.n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+tr.total td { font-weight: 600; border-bottom: 1px solid var(--ink-soft); }
+.table-wrap { overflow-x: auto; }
+
+.callout { margin-top: 36px; padding: 28px 32px; background: var(--paper-deep); border-left: 2px solid var(--claret); }
+.callout p:first-child { margin-top: 0; }
+
+.next { text-align: center; margin-top: 120px; padding: 72px 24px; border-top: 1px solid var(--gold-line); border-bottom: 1px solid var(--gold-line); }
+.next h2 { margin-top: 0; }
+.next p { max-width: 50ch; margin: 20px auto 0; }
+.btn {
+  display: inline-block; margin-top: 36px; font-weight: 500; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase;
+  background: var(--claret); color: var(--paper); border: 1px solid var(--claret); border-radius: 2px; padding: 18px 40px;
+}
+.btn:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.sign { margin-top: 28px; font-style: italic; color: var(--ink-soft); }
+.legal { margin-top: 64px; font-size: 15px; color: var(--ink-soft); text-align: center; font-style: italic; }
+
+@media (max-width: 700px) {
+  body { font-size: 18px; }
+  .bar { padding: 18px 20px; }
+  .cover { padding: 80px 20px 72px; }
+  .cover h1 { font-size: 42px; }
+  h2 { font-size: 32px; }
+  table { font-size: 15px; }
+  th, td { padding: 10px 6px; }
+}
+@media print {
+  @page { size: A4; margin: 18mm 16mm; }
+  body { font-size: 12pt; background: #fff; }
+  .bar, .toc, .next .btn, .noprint { display: none !important; }
+  .cover { background: none; padding: 40mm 0 0; min-height: 250mm; page-break-after: always; }
+  main { max-width: none; padding: 0; }
+  section { padding-top: 0; page-break-before: always; }
+  section.flow { page-break-before: auto; padding-top: 14mm; }
+  table, .callout, tr { page-break-inside: avoid; }
+  h2, h3 { page-break-after: avoid; break-after: avoid; }
+  .next { page-break-before: always; margin-top: 0; }
+  a { color: var(--ink); }
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <a class="word" href="/">REFUGE</a>
+  <a class="pdf caps" href="/founding-pack/refuge-founding-pack.pdf" download>Download PDF</a>
+</div>
+
+<header class="cover">
+  <span class="monogram" aria-hidden="true">R</span>
+  <div class="appellation"><span class="caps">Founding pack · October 2026</span></div>
+  <h1>Refuge</h1>
+  <p class="lead">A self-sufficient private estate near Saint-Émilion, owned by 26 founding families. Somewhere to disconnect, among people who want the same things you do.</p>
+  <p class="from">Prepared by Dan Barnes, founder</p>
+</header>
+
+<main>
+  <ol class="toc">
+    <li><a href="#glance">At a glance</a></li>
+    <li><a href="#idea">The idea</a></li>
+    <li><a href="#estate">The estate</a></li>
+    <li><a href="#family">What a family gets</a></li>
+    <li><a href="#held">How it is held</a></li>
+    <li><a href="#runs">Who runs it</a></li>
+    <li><a href="#numbers">The numbers</a></li>
+    <li><a href="#join">Timeline and how to join</a></li>
+    <li><a href="#risks">Risks, and what is not yet confirmed</a></li>
+  </ol>
+
+  <section id="glance">
+    <span class="num">I</span>
+    <h2>At a glance</h2>
+    <p class="first">Refuge is a private estate on Bordeaux&rsquo;s Right Bank, near Saint-Émilion, owned by 26 founding families and run by Caroline. We are raising €2.3M from those families, with a €1.0M bank loan alongside, to buy and restore a domaine of 6&ndash;10 hectares and open in 2027.</p>
+    <ul>
+      <li><strong>What it is:</strong> a working estate with a main house, 14 lodges and its own power, water and food.</li>
+      <li><strong>Who it is for:</strong> families who spent the last ten years at full speed and want somewhere that is already theirs when they arrive.</li>
+      <li><strong>What you hold:</strong> shares in the company that owns the land and buildings, plus the right to use the estate. You are an owner, not a guest.</li>
+      <li><strong>Three forms:</strong> Estate Partner (€175,000, six places, your own lodge), Founding Partner (€90,000, ten places), Member (€35,000, ten places). Each carries an annual fee.</li>
+      <li><strong>Who runs it:</strong> Caroline, full-time, with an experienced estate manager under her. Dan is founder and investor.</li>
+      <li><strong>When:</strong> founding commitments now, property secured in the first half of 2027, opening to families in late 2027.</li>
+    </ul>
+  </section>
+
+  <section id="idea">
+    <span class="num">II</span>
+    <h2>The idea</h2>
+    <p class="first">Refuge is a self-sufficient estate where families come to disconnect: from screens, from schedules, from the speed of the last ten years. You share it with a small group of people who want the same things you do: time with their children, good food, land worth looking after, and conversation that isn&rsquo;t about work.</p>
+    <p>It is not a hotel, a resort or a commune. Your lodge is private and you come and go as you like. Nobody tells you how to spend your days, and there is no programme, ideology or membership code beyond being good company. The estate is staffed, stocked and ready, whether you arrive for a long weekend or the whole of August.</p>
+    <p><strong>Self-sufficient by design.</strong> Solar with battery storage, a borehole and water treatment, wood heat, a kitchen garden and orchard. The estate produces its own power, water and much of its food. In practice that means lower running costs, better food and a place that keeps working when the grid or the supply chain doesn&rsquo;t.</p>
+  </section>
+
+  <section id="estate">
+    <span class="num">III</span>
+    <h2>The estate</h2>
+    <p class="first">We are buying an existing domaine of 6&ndash;10 hectares, with a house and outbuildings, within about 30 minutes of Saint-Émilion.</p>
+    <p>We buy rather than build, because French farm and natural zoning blocks most new construction. A domaine with barns we can convert is the reliable route. The search area is the edge of the Libournais, Entre-Deux-Mers and Côtes de Bourg: the Right Bank on the doorstep, at a land price that makes 6&ndash;10 hectares workable.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Part</th><th>What it holds</th></tr></thead>
+      <tbody>
+        <tr><td>Main house</td><td>Kitchen, long table, library, rooms for staff and guests</td></tr>
+        <tr><td>Private lodges (6)</td><td>One per Estate Partner family, designed with them</td></tr>
+        <tr><td>Shared lodges (8)</td><td>Booked by Founding Partners and Members, let to curated guests when free</td></tr>
+        <tr><td>Grounds</td><td>Pool, kitchen garden, orchard, woodland, a small vineyard if the land has one</td></tr>
+        <tr><td>Systems</td><td>Solar and storage, borehole, water treatment, wood heat, cold storage</td></tr>
+      </tbody>
+    </table></div>
+    <p>The lodges are a mix of converted outbuildings and low-impact new lodges, where the zoning allows.</p>
+  </section>
+
+  <section id="family">
+    <span class="num">IV</span>
+    <h2>What a family gets</h2>
+    <p class="first">Every family holds shares in the estate, pays a founding contribution once and an annual fee for staff, upkeep and the house running as it should.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th></th><th>Estate Partner</th><th>Founding Partner</th><th>Member</th></tr></thead>
+      <tbody>
+        <tr><td>Places</td><td>6</td><td>10</td><td>10</td></tr>
+        <tr><td>Founding contribution</td><td>€175,000</td><td>€90,000</td><td>€35,000</td></tr>
+        <tr><td>Annual fee</td><td>€18,000</td><td>€13,000</td><td>€10,000</td></tr>
+        <tr><td>Lodge</td><td>Your own, designed with you</td><td>Shared lodges</td><td>Shared lodges</td></tr>
+        <tr><td>Nights a year</td><td>Unlimited in your lodge</td><td>28</td><td>14</td></tr>
+        <tr><td>July&ndash;August</td><td>Unlimited</td><td>2 weeks, by ballot</td><td>1 week, by ballot</td></tr>
+        <tr><td>Guests</td><td>Stay with you</td><td>On your nights</td><td>On your nights</td></tr>
+        <tr><td>Voice</td><td>Seat on the estate council</td><td>Vote at the annual meeting</td><td>Vote at the annual meeting</td></tr>
+      </tbody>
+    </table></div>
+    <p>Extra nights beyond the allowance are booked at a member rate, well below the guest rate. When an Estate Partner&rsquo;s lodge is empty, the estate can let it to curated guests if the family wants it to, with the income going back to that family less a management share.</p>
+    <p>Members can move up a form while places remain. The difference in contribution buys additional shares.</p>
+  </section>
+
+  <section id="held">
+    <span class="num">V</span>
+    <h2>How it is held</h2>
+    <p class="first">Two French companies keep ownership and operations apart. One owns the estate, the other runs it.</p>
+    <ul>
+      <li><strong>Refuge Domaine SAS (the property company)</strong> owns the land and buildings. Founding families hold its shares in proportion to their contribution. It carries the bank loan and receives rent from the operating company.</li>
+      <li><strong>Refuge Maison SAS (the operating company)</strong> employs the staff, collects annual fees and guest income, runs the estate and pays rent to the property company. Caroline is its présidente.</li>
+    </ul>
+    <p><strong>Your shares carry your use rights.</strong> You hold a stake in a real asset, not a timeshare. The use rights are attached to the shares and pass with them.</p>
+    <p><strong>Getting out.</strong> You can sell your shares to an incoming family approved by the estate council. Existing families have first refusal, and the estate keeps a waiting list so there is a buyer when someone wants to leave. There is no promise of a dividend or a fixed return. Any surplus goes to the maintenance reserve first.</p>
+    <p><strong>Founders&rsquo; shares.</strong> Dan and Caroline put in the work of founding and running the estate rather than a cash contribution at Estate Partner scale. They hold founder shares in the property company at a fixed percentage agreed before the first close, vesting over four years. The percentage is set out in the term sheet.</p>
+    <p>The structure will be confirmed with a French avocat and expert-comptable before any contribution is called.</p>
+  </section>
+
+  <section id="runs">
+    <span class="num">VI</span>
+    <h2>Who runs it</h2>
+    <p class="first">Caroline runs Refuge full-time. She is an interior designer, has sat as trustee on several charity boards and is, by common agreement, the best host any of us know.</p>
+    <p>The estate gets one clear eye from the first sketch to the last cushion, and an operator who knows how a board should hold her to account. Under her, from opening:</p>
+    <ul>
+      <li><strong>An estate manager</strong> with hotel or private-estate experience, running the daily operation, staff and guest stays.</li>
+      <li><strong>Three staff:</strong> house and housekeeping, kitchen, grounds and systems, with seasonal help in summer.</li>
+      <li><strong>A French expert-comptable</strong> for payroll, tax and both companies&rsquo; accounts.</li>
+    </ul>
+    <p>Dan is founder and investor. He does not run the estate day to day.</p>
+    <p><strong>Governance.</strong> An estate council of three is elected by the families, with an Estate Partner seat. It approves the annual budget, Caroline&rsquo;s pay, any contract between the estate and the founders, and every new family. Accounts are shared with every family each year. If Caroline steps back, the estate manager runs the house while the council appoints a successor.</p>
+  </section>
+
+  <section id="numbers">
+    <span class="num">VII</span>
+    <h2>The numbers</h2>
+    <p class="first">The project costs €3.3M, funded 70% by founding families and 30% by a French bank loan. Once open, annual fees and curated guest stays cover running costs and the loan with about €58,000 a year to spare.</p>
+    <p>All figures are planning estimates, to be firmed up once a property is under offer.</p>
+    <h3>Uses</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td>Acquisition: domaine of 6&ndash;10 ha with buildings</td><td class="n">€1,400,000</td></tr>
+        <tr><td>Notaire and acquisition fees (~7.5%)</td><td class="n">€105,000</td></tr>
+        <tr><td>Main house and barn conversion</td><td class="n">€450,000</td></tr>
+        <tr><td>14 lodges: 6 private, 8 shared (~€45,000 each)</td><td class="n">€630,000</td></tr>
+        <tr><td>Self-sufficiency: solar, storage, borehole, water, garden</td><td class="n">€250,000</td></tr>
+        <tr><td>Architect, engineers, permits</td><td class="n">€100,000</td></tr>
+        <tr><td>Contingency (~12% of works)</td><td class="n">€200,000</td></tr>
+        <tr><td>Pre-opening costs and working capital</td><td class="n">€165,000</td></tr>
+        <tr class="total"><td>Total</td><td class="n">€3,300,000</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Sources</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td>6 Estate Partners × €175,000</td><td class="n">€1,050,000</td></tr>
+        <tr><td>10 Founding Partners × €90,000</td><td class="n">€900,000</td></tr>
+        <tr><td>10 Members × €35,000</td><td class="n">€350,000</td></tr>
+        <tr><td>Bank loan, 20 years at ~4.5%</td><td class="n">€1,000,000</td></tr>
+        <tr class="total"><td>Total</td><td class="n">€3,300,000</td></tr>
+      </tbody>
+    </table></div>
+    <h3>A normal year, once open</h3>
+    <div class="table-wrap"><table>
+      <tbody>
+        <tr><td>Annual fees (6 × €18k, 10 × €13k, 10 × €10k)</td><td class="n">€338,000</td></tr>
+        <tr><td>Curated guest stays (900 nights at €480)</td><td class="n">€432,000</td></tr>
+        <tr class="total"><td>Income</td><td class="n">€770,000</td></tr>
+        <tr><td>Estate manager and three staff, with employer charges</td><td class="n">(€275,000)</td></tr>
+        <tr><td>Caroline, operator, with employer charges</td><td class="n">(€87,000)</td></tr>
+        <tr><td>Food and hospitality for guest stays (25%)</td><td class="n">(€108,000)</td></tr>
+        <tr><td>Utilities, maintenance, grounds</td><td class="n">(€80,000)</td></tr>
+        <tr><td>Loan repayment</td><td class="n">(€77,000)</td></tr>
+        <tr><td>Insurance, accounting, legal, property tax, marketing</td><td class="n">(€85,000)</td></tr>
+        <tr class="total"><td>Surplus to maintenance reserve</td><td class="n">€58,000</td></tr>
+      </tbody>
+    </table></div>
+    <p>The eight shared lodges have about 2,900 nights a year. Families use around 420 and guests 900, so the shared lodges run at about 45% occupancy.</p>
+    <div class="callout">
+      <p><strong>If guest stays come in at half the plan,</strong> the estate runs about €104,000 short. We would close that with a smaller team in the quiet months and a fee review at the annual meeting. Founding contributions are never used to cover running costs.</p>
+    </div>
+  </section>
+
+  <section id="join">
+    <span class="num">VIII</span>
+    <h2>Timeline and how to join</h2>
+    <p class="first">No money moves until the property company exists, a property is under offer and enough families have committed to buy it.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>When</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td>Now to early 2027</td><td>Founding conversations: an introduction call with Dan, then a day in Bordeaux hosted by Caroline</td></tr>
+        <tr><td>On saying yes</td><td>A non-binding letter of intent naming your form. No payment</td></tr>
+        <tr><td>Early 2027</td><td>Companies formed, shortlisted properties visited, bank terms agreed</td></tr>
+        <tr><td>First close</td><td>Once 60% of contributions are committed and a property is under offer: the founding agreement is signed and 20% is paid into escrow</td></tr>
+        <tr><td>Property purchase</td><td>The balance is called at signing with the notaire</td></tr>
+        <tr><td>Mid to late 2027</td><td>Restoration, lodges and systems built. Families help design their lodges</td></tr>
+        <tr><td>Late 2027</td><td>Opening weekend for founding families</td></tr>
+      </tbody>
+    </table></div>
+    <p>If the first close isn&rsquo;t reached within twelve months of the first letter of intent, every escrowed payment is returned in full.</p>
+  </section>
+
+  <section id="risks">
+    <span class="num">IX</span>
+    <h2>Risks, and what is not yet confirmed</h2>
+    <p class="first">We would rather you hear these from us.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Risk</th><th>How we handle it</th></tr></thead>
+      <tbody>
+        <tr><td>The right property takes longer to find</td><td>Contributions sit in escrow and come back in full if the first close isn&rsquo;t reached within twelve months</td></tr>
+        <tr><td>Zoning limits how many lodges we can add</td><td>We only buy a domaine whose buildings and permits support the plan, checked with the mairie before any offer</td></tr>
+        <tr><td>SAFER, the rural land agency, pre-empts the purchase</td><td>A buyer&rsquo;s agent who knows the agency, and a purchase structured around its rules</td></tr>
+        <tr><td>Works overrun</td><td>12% contingency, a fixed-price main contract where possible, and Caroline designing in-house</td></tr>
+        <tr><td>Guest income is lower than planned</td><td>A smaller team in the quiet months and a fee review. Founding contributions never fund running costs</td></tr>
+        <tr><td>Caroline steps back</td><td>The estate manager runs the house while the council appoints a successor</td></tr>
+        <tr><td>You want to leave</td><td>Sell your shares to an approved family from the waiting list. Existing families have first refusal</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Still to confirm:</strong> the legal structure and tax treatment, with a French avocat and expert-comptable; the founders&rsquo; share percentage, in the term sheet; bank terms, once a property is identified; and the property itself, and with it every number in this pack.</p>
+  </section>
+
+  <div class="next">
+    <h2>The next step</h2>
+    <p>A 30-minute introduction call with Dan. If it feels right after that, Caroline hosts you for a day in Bordeaux.</p>
+    <a class="btn" href="mailto:hello@refuge.club?subject=Refuge%20%E2%80%94%20introduction%20call">Arrange a call</a>
+    <p class="sign">Dan Barnes, founder · hello@refuge.club</p>
+  </div>
+
+  <p class="legal">This pack describes a project in preparation. It is not an offer of securities or a public offering, and every figure is an estimate.</p>
+</main>
+
+</body>
+</html>
