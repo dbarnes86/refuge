@@ -407,6 +407,7 @@ h2 {
   color: var(--claret);
 }
 .form-actions { text-align: center; margin-top: 56px; }
+.field-trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .confirmation { text-align: center; padding: 48px 0; }
 .confirmation p { margin-top: 32px; color: var(--ink-soft); }
 .confirm-title { font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1.2; margin-top: 32px; }
@@ -659,6 +660,10 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
           <label class="caps" for="field-about">A line or two about you and your family</label>
           <textarea id="field-about" name="about" rows="3"></textarea>
         </div>
+        <div class="field-trap" aria-hidden="true">
+          <label for="field-website">Website</label>
+          <input type="text" id="field-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
         <div class="form-actions">
           <button class="btn btn-solid" type="submit" id="submit-btn">Request the founding pack</button>
         </div>
@@ -712,6 +717,10 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
   }
 
+  // Set to the deployed Cloudflare Worker URL (see worker/README.md) to send through Resend.
+  // While empty, requests go through FormSubmit.
+  var REQUEST_ENDPOINT = '';
+
   var AUTORESPONSE = 'Dear {name},\n\n'
     + 'Thank you for asking about Refuge. Here is the founding pack:\n\n'
     + 'Read online: https://refuge.club/founding-pack/\n'
@@ -749,24 +758,30 @@ html.motion .reveal.revealed { opacity: 1; transform: none; }
     var controller = 'AbortController' in window ? new AbortController() : null;
     var timeout = controller && setTimeout(function () { controller.abort(); }, 12000);
 
-    fetch('https://formsubmit.co/ajax/hello@refuge.club', {
+    var fields = {
+      name: name.value.trim(),
+      email: email.value.trim(),
+      interest: interest.value,
+      message: about.value.trim()
+    };
+    var payload = REQUEST_ENDPOINT
+      ? Object.assign({ website: document.getElementById('field-website').value }, fields)
+      : Object.assign({
+          _subject: 'Founding pack request — ' + fields.name + ' (' + fields.interest + ')',
+          _autoresponse: AUTORESPONSE.replace('{name}', fields.name.split(' ')[0]),
+          _template: 'table'
+        }, fields);
+
+    fetch(REQUEST_ENDPOINT || 'https://formsubmit.co/ajax/hello@refuge.club', {
       method: 'POST',
       signal: controller ? controller.signal : undefined,
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        name: name.value.trim(),
-        email: email.value.trim(),
-        interest: interest.value,
-        message: about.value.trim(),
-        _subject: 'Founding pack request — ' + name.value.trim() + ' (' + interest.value + ')',
-        _autoresponse: AUTORESPONSE.replace('{name}', name.value.trim().split(' ')[0]),
-        _template: 'table'
-      })
+      body: JSON.stringify(payload)
     }).then(function (response) {
       if (!response.ok) throw new Error('send failed');
       return response.json();
     }).then(function (result) {
-      if (String(result.success) !== 'true') throw new Error('send failed');
+      if (!result.ok && String(result.success) !== 'true') throw new Error('send failed');
       clearTimeout(timeout);
       document.getElementById('confirm-title').textContent = 'Thank you, ' + name.value.trim().split(' ')[0] + '. Your founding pack is ready.';
       form.hidden = true;
