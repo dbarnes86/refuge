@@ -1,0 +1,13 @@
+name = "refuge-request"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[vars]
+ALLOWED_ORIGIN = "https://refuge.club"
+FROM = "Dan Barnes <dan@refuge.club>"
+REPLY_TO = "hello@refuge.club"
+NOTIFY_TO = "hello@refuge.club"
+PACK_URL = "https://refuge.club/founding-pack/"
+PDF_URL = "https://refuge.club/founding-pack/refuge-founding-pack.pdf"
+
+# Secret, set with: npx wrangler secret put RESEND_API_KEY
