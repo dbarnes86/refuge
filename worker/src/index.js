@@ -85,7 +85,7 @@ function packEmail(first, env) {
     `Read online: ${env.PACK_URL}`,
     `PDF: ${env.PDF_URL}`,
     '',
-    "It covers the estate, what each family gets, how ownership works, the numbers and the risks. Most people start with 'What a family gets' and 'The numbers'.",
+    "It opens with why we are building Refuge, then covers the estate, what each family gets, how ownership works, the numbers and the risks. Start with 'Why Refuge'.",
     '',
     'I will be in touch personally within one working day to arrange a 30-minute introduction call. If you would like to pick a time now, just reply with a couple that suit you.',
     '',
@@ -99,7 +99,7 @@ function packEmail(first, env) {
   const html = `<!DOCTYPE html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Your Refuge founding pack</title></head>
 <body style="margin:0;padding:0;background:#F7F4EE;">
-<div style="display:none;max-height:0;overflow:hidden;">The estate, the three forms, how ownership works, the numbers and the risks.</div>
+<div style="display:none;max-height:0;overflow:hidden;">Why Refuge, the estate, the three forms, how ownership works, the numbers and the risks.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F7F4EE;">
 <tr><td align="center" style="padding:48px 20px;">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
@@ -113,7 +113,7 @@ function packEmail(first, env) {
   <table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 28px;"><tr><td style="background:#5E1A24;border-radius:2px;">
     <a href="${env.PACK_URL}" style="display:inline-block;padding:16px 34px;font-family:${serif};font-size:13px;letter-spacing:0.22em;text-transform:uppercase;color:#F7F4EE;text-decoration:none;">Read the founding pack</a>
   </td></tr></table>
-  ${p(`It covers the estate, what each family gets, how ownership works, the numbers and the risks. Most people start with <em>What a family gets</em> and <em>The numbers</em>. There is also a <a href="${env.PDF_URL}" style="color:#5E1A24;">PDF version</a> to keep.`)}
+  ${p(`It opens with why we are building Refuge, then covers the estate, what each family gets, how ownership works, the numbers and the risks. Start with <em>Why Refuge</em>. There is also a <a href="${env.PDF_URL}" style="color:#5E1A24;">PDF version</a> to keep.`)}
   ${p('I will be in touch personally within one working day to arrange a 30-minute introduction call. If you would like to pick a time now, just reply with a couple that suit you.')}
   ${p('Dan Barnes<br><span style="color:#5C564D;font-style:italic;">Founder, Refuge</span>', 'margin-top:28px;')}
 </td></tr>
